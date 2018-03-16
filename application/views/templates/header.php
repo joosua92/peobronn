@@ -8,21 +8,22 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 		<link rel="stylesheet" href="./resources/extra_style.css">
 		<title><?php echo $title; ?></title>
+		<link rel="shortcut icon" href="<?php echo base_url(); ?>resources/logo.png">
 	</head>
 	<body>
 
 		<nav class="navbar navbar-inverse">
 			<div class="container">
 				<div class="navbar-header">
-					<a href=".">
-						<img src="./resources/logo.png" alt="Mängumaailm">
+					<a href="<?php echo base_url(); ?>">
+						<img src="<?php echo base_url(); ?>resources/logo.png" alt="Mängumaailm">
 					</a>
 				</div>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="./mangud">MÄNGUD & ELAMUSED</a></li>
-					<li><a href="./hinnakiri">HINNAKIRI</a></li>
-					<li><a href="./kkk">KKK</a></li>
-					<li><a href="./broneerimine">BRONEERIMINE</a></li>
+					<li><a href="<?php echo base_url(); ?>mangud">MÄNGUD & ELAMUSED</a></li>
+					<li><a href="<?php echo base_url(); ?>hinnakiri">HINNAKIRI</a></li>
+					<li><a href="<?php echo base_url(); ?>kkk">KKK</a></li>
+					<li><a href="<?php echo base_url(); ?>broneerimine">BRONEERIMINE</a></li>
 				</ul>
 			</div>
 		</nav>
