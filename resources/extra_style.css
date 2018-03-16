@@ -1,5 +1,21 @@
 footer {
-		background-color: DarkSlateGray;
-		color: White;
-		padding: 40px;
-    }
+	background-color: DarkSlateGray;
+	color: White;
+	padding: 40px;
+}
+
+.tutvustus {
+	font-size: 140%;
+}
+
+dd {
+    padding-top: 6px;
+    padding-right: 0px;
+    padding-bottom: 15px;
+    padding-left: 0px
+}
+
+.galerii p {
+	text-align: center;
+}
+		
