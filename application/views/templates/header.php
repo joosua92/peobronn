@@ -3,10 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-		<link rel="stylesheet" href="./resources/extra_style.css">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/extra_style.css">
 		<title><?php echo $title; ?></title>
 		<link rel="shortcut icon" href="<?php echo base_url(); ?>resources/logo.png">
 	</head>
@@ -16,7 +14,7 @@
 			<div class="container">
 				<div class="navbar-header">
 					<a href="<?php echo base_url(); ?>">
-						<img src="<?php echo base_url(); ?>resources/logo.png" alt="Mängumaailm">
+						<img src="<?php echo base_url(); ?>assets/images/logo.png" alt="Mängumaailm">
 					</a>
 				</div>
 				<ul class="nav navbar-nav navbar-right">
