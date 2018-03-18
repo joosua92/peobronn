@@ -30,10 +30,7 @@ dd {
 
 #pakett, #kellaaeg {
 	max-width: 30%;
-}
-
-a:focus, a:hover, li:focus, li:hover {
-	background-color = White;
+	min-width: 10em;
 }
 
 .navbar-inverse .navbar-nav > .active > a,

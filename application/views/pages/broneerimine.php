@@ -14,7 +14,7 @@
 				<form>
 					<div class="form-group">
 						<label for="date">Kuupäev</label>
-						<input type="date" class="form-control" id="date" name="date">
+						<input type="text" class="form-control" id="date" placeholder="18-03-2018" name="date">
 					</div>
 					<div class="form-group">
 						<label for="kellaaeg">Vali kellaaeg:</label>
