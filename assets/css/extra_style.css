@@ -38,3 +38,12 @@ dd {
 .navbar-inverse .navbar-nav > .active > a:focus {
   background-color: transparent;
 }
+
+#konto-lingid > li > a {
+	color: White;
+	font-size: 80%;
+}
+
+#konto-lingid-konteiner {
+	padding: 0px;
+}

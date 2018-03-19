@@ -38,4 +38,19 @@ class Pages extends CI_Controller {
 		$data['title'] = "Broneerimine - Mängumaailm";
 		$this->loadPage("broneerimine", $data);
 	}
+	
+	public function sisene() {
+		$data['title'] = "Sisene - Mängumaailm";
+		$this->loadPage("sisene", $data);
+	}
+	
+	public function registreeru() {
+		$data['title'] = "Registreeru - Mängumaailm";
+		$this->loadPage("registreeru", $data);
+	}
+	
+	public function profiil() {
+		$data['title'] = "Profiil - Mängumaailm";
+		$this->loadPage("profiil", $data);
+	}
 }

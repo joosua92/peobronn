@@ -20,12 +20,25 @@
 						<img src="<?php echo base_url(); ?>assets/images/logo.png" alt="Mängumaailm">
 					</a>
 				</div>
-				
 				<ul class="nav navbar-nav navbar-right" id="navbar">
 					<li><a href="<?php echo base_url(); ?>mangud">MÄNGUD & ELAMUSED</a></li>
 					<li><a href="<?php echo base_url(); ?>hinnakiri">HINNAKIRI</a></li>
 					<li><a href="<?php echo base_url(); ?>kkk">KKK</a></li>
 					<li><a href="<?php echo base_url(); ?>broneerimine">BRONEERIMINE</a></li>
 				</ul>
+				<div class="container pull-right" id="konto-lingid-konteiner">
+					<div class="pull-right">
+						<ul class="list-inline" id="konto-lingid">
+							<li><a href="<?php echo base_url(); ?>sisene">SISENE</a></li>
+							<li><a href="<?php echo base_url(); ?>registreeru">REGISTREERU</a></li>
+							<!--
+							<li><a href="<?php echo base_url(); ?>profiil">PROFIIL</a></li>
+							<li><a href="<?php echo base_url(); ?>välju">VÄLJU</a></li>
+							-->
+						</ul>
+					</div>
+				</div>
 			</div>
 		</nav>
+		
+		 
