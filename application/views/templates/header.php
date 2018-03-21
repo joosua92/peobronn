@@ -11,7 +11,7 @@
 		<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/page.js"></script>
 	</head>
-	<body onload="setActiveNavitem()">
+	<body>
 
 		<nav class="navbar navbar-inverse">
 			<div class="container">
@@ -31,7 +31,7 @@
 						<ul class="list-inline" id="konto-lingid">
 							<li><a href="<?php echo base_url(); ?>sisene">SISENE</a></li>
 							<li><a href="<?php echo base_url(); ?>registreeru">REGISTREERU</a></li>
-							<!--
+							<!-- if logged in, swap
 							<li><a href="<?php echo base_url(); ?>profiil">PROFIIL</a></li>
 							<li><a href="<?php echo base_url(); ?>välju">VÄLJU</a></li>
 							-->

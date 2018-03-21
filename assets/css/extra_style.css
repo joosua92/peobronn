@@ -4,6 +4,10 @@ footer {
 	padding: 40px;
 }
 
+#footer-clear {
+	padding: 50px;
+}
+
 .tutvustus {
 	font-size: 140%;
 }

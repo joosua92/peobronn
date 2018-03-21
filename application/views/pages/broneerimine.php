@@ -13,7 +13,7 @@
 			<div class="col-md-6">
 				<form>
 					<div class="form-group">
-						<label for="date">Kuupäev</label>
+						<label for="date">Kuupäev:</label>
 						<input type="text" class="form-control" id="date" placeholder="18-03-2018" name="date">
 					</div>
 					<div class="form-group">
@@ -38,18 +38,6 @@
 							<option>Pakett 1</option>
 							<option>Pakett 2</option>
 						</select>
-					</div>
-					<div class="form-group">
-						<label for="name">Nimi:</label>
-						<input type="text" class="form-control" id="name" placeholder="Sisesta nimi" name="name">
-					</div>
-					<div class="form-group">
-						<label for="email">Email:</label>
-						<input type="email" class="form-control" id="email" placeholder="Sisesta email" name="email">
-					</div>
-					<div class="form-group">
-						<label for="phone">Telefon:</label>
-						<input type="text" class="form-control" id="phone" placeholder="Sisesta telefoninumber" name="phone">
 					</div>
 					<button type="submit" class="btn btn-default">Broneeri</button>
 				</form>

@@ -2,12 +2,10 @@
 class Pages extends CI_Controller {
 	
 	
-	public function loadPage($page, $data) {
+	private function loadPage($page, $data) {
 		if (!file_exists(APPPATH.'views/pages/' . $page . '.php')) {
 			show_404();
 		}
-		
-		$this->load->helper('url');
 		
 		$this->load->view('templates/header', $data);
         $this->load->view('pages/'.$page, $data);
