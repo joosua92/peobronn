@@ -32,3 +32,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/results/
 assets/images/mangupildid/Thumbs.db
 assets/images/Thumbs.db
+application/config/database.php
