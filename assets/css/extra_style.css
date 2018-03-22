@@ -4,6 +4,14 @@ footer {
 	padding: 40px;
 }
 
+html, body {
+	height: 100%;
+}
+
+.wrapper {
+	min-height: 100%;
+}
+
 #footer-clear {
 	padding: 50px;
 }

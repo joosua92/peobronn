@@ -12,6 +12,7 @@
 		<script src="<?php echo base_url(); ?>assets/js/page.js"></script>
 	</head>
 	<body>
+	<div class="wrapper">
 
 		<nav class="navbar navbar-inverse">
 			<div class="container">

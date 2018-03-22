@@ -1,5 +1,5 @@
-		
+		</div>
 		<div id="footer-clear"></div>
-		<footer class="footer navbar-fixed-bottom text-center"></footer>
+		<footer class="footer text-center"></footer>
     </body>
 </html>
