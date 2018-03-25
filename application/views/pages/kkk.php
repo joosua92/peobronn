@@ -9,7 +9,7 @@
 		</ol>
 	</nav>
 	<div>
-		<dl>
+		<dl id="küsimused">
 			<dt>Küsimus 1</dt>
 			<dd>Vastus 1</dd>
 			<dt>Küsimus 2</dt>

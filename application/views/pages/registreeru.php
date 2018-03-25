@@ -1,12 +1,12 @@
 <div class="container">
-	<div class="page-header">
-		<h1>Registreeru</h1>
-	</div>
-	<div class="alert collapse" role="alert" id="alert-box">
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="page-header">
+				<h1>Registreeru</h1>
+			</div>
+			<div class="alert collapse" role="alert" id="alert-box">
+			</div>
+			<div class="col-md-6">
 				<form action="input/register" method="post" id="register-form">
 					<div class="form-group">
 						<label for="eesnimi">Eesnimi:</label>
@@ -21,10 +21,6 @@
 						<input type="text" class="form-control" id="email" placeholder="Sisesta email" name="email">
 					</div>
 					<div class="form-group">
-						<label for="telefon">Telefon:</label>
-						<input type="text" class="form-control" id="telefon" placeholder="Sisesta telefoninumber" name="telefon">
-					</div>
-					<div class="form-group">
 						<label for="salasõna">Salasõna:</label>
 						<input type="password" class="form-control" id="salasõna" placeholder="Sisesta salasõna" name="salasõna">
 					</div>
@@ -34,6 +30,12 @@
 					</div>
 					<input type="submit" value="Registreeru">
 				</form>
+			</div>
+			<div class="col-md-6">
+				<div id="google-login-container">
+					<div><b>Või sisene läbi Google<b></div>
+					<div class="g-signin2" data-onsuccess="onSignIn"></div>
+				</div>
 			</div>
 		</div>
 	</div>

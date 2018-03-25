@@ -51,4 +51,9 @@ class Pages extends CI_Controller {
 		$data['title'] = "Profiil - Mängumaailm";
 		$this->loadPage("profiil", $data);
 	}
+	
+	public function valjund() {
+		$data['title'] = "Olete välja logitud - Mängumaailm";
+		$this->loadPage("valjund", $data);
+	}
 }

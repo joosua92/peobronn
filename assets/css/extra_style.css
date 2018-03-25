@@ -20,7 +20,7 @@ html, body {
 	font-size: 140%;
 }
 
-dd {
+#küsimused dd {
     padding-top: 6px;
     padding-right: 0px;
     padding-bottom: 15px;
@@ -58,4 +58,30 @@ dd {
 
 #konto-lingid-konteiner {
 	padding: 0px;
+}
+
+.g-signin2 {
+	padding-top: 1em;
+}
+
+#google-login-container {
+	float: right;
+}
+
+#profiilipilt {
+	margin-top: 20px; 
+	width: 200px;
+	height: 200px;
+}
+
+#vaheta-pilti {
+	padding: 20px;
+}
+
+h3 {
+	padding-bottom: 10px;
+}
+
+#logout-message {
+	text-align: center;
 }

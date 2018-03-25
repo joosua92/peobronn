@@ -24,7 +24,32 @@ $(document).ready(function() {
 			var returnData = JSON.parse(data);
 			showAlert(returnData.alertType, returnData.message);
 		};
-		$.post("input/register", formData, fun)
+		$.post("input/register", formData, fun);
+	});
+	
+	// Submit login form with AJAX
+	$("#login-form").submit(function(event){
+		event.preventDefault();
+		var formData = $("#login-form").serialize();
+		var fun = function(data) {
+			var returnData = JSON.parse(data);
+			if (returnData.hasOwnProperty("redirect")) {
+				window.location.href = returnData.redirect;
+			}
+			else {
+				showAlert(returnData.alertType, returnData.message);
+			}
+		};
+		$.post("input/login", formData, fun)
+	});
+	
+	// Log user out
+	$("#logout-link").click(function(){
+		var fun = function(data) {
+			var returnData = JSON.parse(data);
+			window.location.href = returnData.redirect;
+		};
+		$.post("input/logout", fun);
 	});
 });
 
@@ -40,41 +65,28 @@ function showAlert(type, message) {
 	alertBox.show();
 }
 
-/* VALIDATION SHOULD MOVE TO PHP, DELETE THIS AFTER
-function validateRegistration() {
-	// Check if registartion form fields have proper values
-	// eesnimi
-	var eesnimi = $("#eesnimi").val();
-	var pattern = /^[a-zA-ZõäöüÕÄÖÜ -]+$/;
-	if (eesnimi.length == 0) {
-		showAlert("danger", "Eesnimi on nõutud.");
-		return false;
+
+// GOOGLE STUFF, NOT WORKING YET
+function onSignIn(googleUser) {
+	/*
+	var profile = googleUser.getBasicProfile();
+	var userData = {
+		email: profile.getEmail(),
+		firstName: profile.getGivenName(),
+		lastName: profile.getFamilyName()
 	}
-	if (!pattern.test(eesnimi)) {
-		showAlert("danger", "Eesnimi ei sobi.");
-		return false;
+	var fun = function(data) {
+		var returnData = JSON.parse(data);
+		showAlert(returnData.alertType, returnData.message);
 	}
-	// perenimi
-	var perenimi = $("#perenimi").val();
-	pattern = /^[a-zA-ZõäöüÕÄÖÜ-]+$/;
-	if (perenimi.length == 0) {
-		showAlert("danger", "Perenimi on nõutud.");
-		return false;
-	}
-	if (!pattern.test(perenimi)) {
-		showAlert("danger", "Perenimi ei sobi.");
-		return false;
-	}
-	// email
-	var email = $("#email").val();
-	// telefon
-	var telefon = $("#telefon").val();
-	// salasõna
-	var salasõna = $("#salasõna").val();
-	// kordaSalasõna
-	var kordaSalasõna = $("#korda-salasõna").val();
-	
-	//return true;
-	showAlert("success", "KÕIK KORRAS");
-	return false;
-}*/
+	$.post("input/google", userData, fun);*/
+}
+
+function signOut() {
+	/*
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+		showAlert("success", "Olete välja logitud");
+    });
+	*/
+}
