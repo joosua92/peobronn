@@ -47,14 +47,20 @@ $(document).ready(function() {
 	$("#logout-link").click(function(){
 		var fun = function(data) {
 			var returnData = JSON.parse(data);
-			window.location.href = returnData.redirect;
+			if (returnData.logoutStatus == "google") {
+				googleSignOut();
+				window.location.href = returnData.redirect;
+			}
+			else {
+				window.location.href = returnData.redirect;
+			}
 		};
 		$.post("input/logout", fun);
 	});
 });
 
 function showAlert(type, message) {
-	// Shows the message in an alert box of specified type (incase "#alert-box" exists)
+	// Shows the message in an alert box of specified type (in case "#alert-box" exists)
 	var alertBox = $("#alert-box");
 	alertBox.html(message);
 	alertBox.removeClass("alert-success");
@@ -65,28 +71,39 @@ function showAlert(type, message) {
 	alertBox.show();
 }
 
-
-// GOOGLE STUFF, NOT WORKING YET
 function onSignIn(googleUser) {
-	/*
 	var profile = googleUser.getBasicProfile();
 	var userData = {
 		email: profile.getEmail(),
-		firstName: profile.getGivenName(),
-		lastName: profile.getFamilyName()
+		eesnimi: profile.getGivenName(),
+		perenimi: profile.getFamilyName()
 	}
 	var fun = function(data) {
 		var returnData = JSON.parse(data);
-		showAlert(returnData.alertType, returnData.message);
+		if (returnData.loginStatus == "success") {
+			window.location.href = returnData.redirect;
+		}
+		else if (returnData.loginStatus = "already in") {
+			window.location.href = returnData.redirect;
+		}
+		else {
+			showAlert(returnData.alertType, returnData.message);
+			googleSignOut();
+		}
 	}
-	$.post("input/google", userData, fun);*/
+	$.post("input/google", userData, fun);
 }
 
-function signOut() {
-	/*
-    var auth2 = gapi.auth2.getAuthInstance();
+function googleSignOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-		showAlert("success", "Olete välja logitud");
+      console.log('User signed out.');
     });
-	*/
+	auth2.disconnect();
+}
+
+function onGoogleLoad() {
+    gapi.load('auth2', function() {
+		gapi.auth2.init();
+    });
 }

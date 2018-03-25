@@ -18,7 +18,7 @@
 					<h3>Andmed</h3>
 					<p><b>Eesnimi:&nbsp&nbsp</b><?php echo $_SESSION['eesnimi']; ?></p>
 					<p><b>Perenimi:&nbsp&nbsp</b><?php echo $_SESSION['perenimi']; ?></p>
-					<p><b>Email:&nbsp&nbsp</b><?php echo $_SESSION['email']; ?></p>
+					<p><b>E-mail:&nbsp&nbsp</b><?php echo $_SESSION['email']; ?></p>
 				</div>
 			</div>
 			<div class="col-md-6">

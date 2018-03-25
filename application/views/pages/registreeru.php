@@ -17,8 +17,8 @@
 						<input type="text" class="form-control" id="perenimi" placeholder="Sisesta perenimi" name="perenimi">
 					</div>
 					<div class="form-group">
-						<label for="email">Email:</label>
-						<input type="text" class="form-control" id="email" placeholder="Sisesta email" name="email">
+						<label for="email">E-mail:</label>
+						<input type="text" class="form-control" id="email" placeholder="Sisesta e-mail" name="email">
 					</div>
 					<div class="form-group">
 						<label for="salasõna">Salasõna:</label>

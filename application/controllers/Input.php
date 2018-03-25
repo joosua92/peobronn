@@ -17,9 +17,9 @@ class Input extends CI_Controller {
 		);
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[kasutaja.email]', 
 			array(
-				'required' => 'Emaili väli peab olema täidetud',
-				'valid_email' => 'Ebasobiv email',
-				'is_unique' => 'Sisestatud email on juba kasutusel'
+				'required' => 'E-maili väli peab olema täidetud',
+				'valid_email' => 'Ebasobiv e-mail',
+				'is_unique' => 'Sisestatud e-mail on juba kasutusel'
 			)
 		);
 		$this->form_validation->set_rules('salasõna', 'Salasõna', 'required|min_length[8]',
@@ -72,7 +72,7 @@ class Input extends CI_Controller {
 	
 	public function login() {
 		
-		$this->form_validation->set_rules('email', 'Email', 'required', array('required' => 'Palun sisesta email'));
+		$this->form_validation->set_rules('email', 'Email', 'required', array('required' => 'Palun sisesta e-mail'));
 		$this->form_validation->set_rules('salasõna', 'Salasõna', 'required', array('required' => 'Salasõna väli peab olema täidetud'));
 		$returnData = new stdClass();
 		
@@ -99,7 +99,7 @@ class Input extends CI_Controller {
 			$results = $this->main_model->get_user($email);
 			if (count($results) < 1) {
 				$returnData->alertType = 'danger';
-				$returnData->message = 'Sellise emailiga kasutajat ei ole';
+				$returnData->message = 'Sellise e-mailiga kasutajat ei ole';
 				echo json_encode($returnData);
 				return;
 			}
@@ -107,10 +107,10 @@ class Input extends CI_Controller {
 			if ($account->liik != 'TAVALINE') {
 				$returnData->alertType = 'danger';
 				if ($account->liik != 'TAVALINE') {
-					$returnData->message = 'Selle emailiga kasutajaga peab sisse logima läbi Google';
+					$returnData->message = 'Selle e-mailiga kasutajaga peab sisse logima läbi Google';
 				}
 				else {
-					$returnData->message = 'Selle emailiga kasutajaga peab sisse logima ID-kaardiga';
+					$returnData->message = 'Selle e-mailiga kasutajaga peab sisse logima ID-kaardiga';
 				}
 				echo json_encode($returnData);
 				return;
@@ -125,6 +125,7 @@ class Input extends CI_Controller {
 				$_SESSION['email'] = $account->email;
 				$_SESSION['eesnimi'] = $account->eesnimi;
 				$_SESSION['perenimi'] = $account->perenimi;
+				$_SESSION['liik'] = $account->liik;
 				$returnData->redirect = "profiil";
 				echo json_encode($returnData);
 				return;
@@ -133,33 +134,53 @@ class Input extends CI_Controller {
 	}
 	
 	public function logout() {
-		session_unset();
 		$returnData = new stdClass();
-		$returnData->redirect = "valjund";
+		if (isset($_SESSION['liik']) && $_SESSION['liik'] == 'GOOGLE') {
+			$returnData->logoutStatus = 'google';
+			$returnData->redirect = 'valjund';
+		}
+		else {
+			$returnData->logoutStatus = 'normal';
+			$returnData->redirect = 'valjund';
+		}
+		session_unset();
 		echo json_encode($returnData);
 	}
 	
-	/*public function google() {
-		$this->form_validation->set_rules('email', 'Email', 'is_unique[kasutaja.email]', 'Teie email on juba kasutusel, logige sellega sisse või looge uus kasutaja');
+	public function google() {
 		
+		$this->load->model("main_model");
 		$returnData = new stdClass();
 		
-		if ($this->form_validation->run() == FALSE)
-		{
-			// Form validation ei läinud läbi
-			$errorsStr = trim(validation_errors());
-			$errors = explode("\n", $errorsStr);
-			$returnMessage = "";
-			foreach ($errors as $error) {
-				$returnMessage .= $error;
-			}
-			$returnData->alertType = 'danger';
-			$returnData->message = $returnMessage;
+		if (isset($_SESSION['email']) && $_SESSION['email'] == $this->input->post('email')) {
+			// Juba sisse logitud
+			$returnData->loginStatus = 'already in';
+			$returnData->redirect = 'profiil';
+			echo json_encode($returnData);
+			return;
 		}
-		else
-		{
-			// Validation läks läbi
-			$this->load->model("main_model");
+		
+		$result = $this->main_model->get_user($this->input->post('email'));
+		if (count($result) > 0) {
+			$account = $result[0];
+			if ($account->liik == 'GOOGLE') {
+				// Kasutaja olemas
+				$_SESSION['email'] = $account->email;
+				$_SESSION['eesnimi'] = $account->eesnimi;
+				$_SESSION['perenimi'] = $account->perenimi;
+				$_SESSION['liik'] = $account->liik;
+				$returnData->loginStatus = 'already in';
+				$returnData->redirect = 'profiil';
+			}
+			else {
+				// Selle e-mailiga kasutaja juba olemas, aga pole GOOGLE tüüpi
+				$returnData->loginStatus = 'õfail';
+				$returnData->alertType = 'danger';
+				$returnData->message = 'Selle e-mailiga kasutaja juba eksisteerib';
+			}
+		}
+		else {
+			// Kasutaja pole varem lehel sisenenud, pannakse andmed andmebaasi
 			$data = array(
 				'eesnimi' => $this->input->post('eesnimi'),
 				'perenimi' => $this->input->post('perenimi'),
@@ -168,11 +189,14 @@ class Input extends CI_Controller {
 				'liik' => 'GOOGLE'
 			);
 			$this->main_model->insert_user($data);
-			
-			$returnData->alertType = 'success';
-			$returnData->message = 'Registreerumine õnnestus.';
+			$_SESSION['email'] = $this->input->post('email');
+			$_SESSION['eesnimi'] = $this->input->post('eesnimi');
+			$_SESSION['perenimi'] = $this->input->post('perenimi');
+			$_SESSION['liik'] = 'GOOGLE';
+			$returnData->loginStatus = "success";
+			$returnData->redirect = "profiil";
 		}
 		
 		echo json_encode($returnData);
-	}*/
+	}
 }

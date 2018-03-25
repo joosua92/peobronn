@@ -9,8 +9,8 @@
 			<div class="col-md-6">
 				<form action="input/login" method="post" id="login-form">
 					<div class="form-group">
-						<label for="email">Email:</label>
-						<input type="text" class="form-control" id="email" placeholder="Sisesta email" name="email">
+						<label for="email">E-mail:</label>
+						<input type="text" class="form-control" id="email" placeholder="Sisesta e-mail" name="email">
 					</div>
 					<div class="form-group">
 						<label for="salasõna">Salasõna:</label>
