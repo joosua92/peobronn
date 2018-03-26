@@ -33,7 +33,7 @@
 			</div>
 			<div class="col-md-6">
 				<div id="google-login-container">
-					<div><b>Või sisene läbi Google<b></div>
+					<div><b>Sisene läbi Google<b></div>
 					<div class="g-signin2" data-onsuccess="onSignIn"></div>
 				</div>
 			</div>

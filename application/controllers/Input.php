@@ -2,7 +2,6 @@
 class Input extends CI_Controller {
 	
 	public function register() {
-		
 		$this->form_validation->set_rules('eesnimi', 'Eesnimi', 'required|regex_match[/^[a-zA-ZõäöüÕÄÖÜ -]+$/]',
 			array(
 				'required' => 'Eesnime väli peab olema täidetud',
@@ -37,8 +36,7 @@ class Input extends CI_Controller {
 		
 		$returnData = new stdClass();
 		
-		if ($this->form_validation->run() == FALSE)
-		{
+		if ($this->form_validation->run() == FALSE) {
 			// Form validation ei läinud läbi
 			$errorsStr = trim(validation_errors());
 			$errors = explode("\n", $errorsStr);
@@ -49,8 +47,7 @@ class Input extends CI_Controller {
 			$returnData->alertType = 'danger';
 			$returnData->message = $returnMessage;
 		}
-		else
-		{
+		else {
 			// Validation läks läbi
 			$this->load->model("main_model");
 			$data = array(
@@ -71,7 +68,6 @@ class Input extends CI_Controller {
 	
 	
 	public function login() {
-		
 		$this->form_validation->set_rules('email', 'Email', 'required', array('required' => 'Palun sisesta e-mail'));
 		$this->form_validation->set_rules('salasõna', 'Salasõna', 'required', array('required' => 'Salasõna väli peab olema täidetud'));
 		$returnData = new stdClass();
@@ -148,7 +144,6 @@ class Input extends CI_Controller {
 	}
 	
 	public function google() {
-		
 		$this->load->model("main_model");
 		$returnData = new stdClass();
 		
@@ -197,6 +192,65 @@ class Input extends CI_Controller {
 			$returnData->redirect = "profiil";
 		}
 		
+		echo json_encode($returnData);
+	}
+	
+	public function reserv() {
+		$returnData = new stdClass();
+		$this->load->model("main_model");
+		if (!isset($_SESSION['email'])) {
+			// Ei tohiks siia tegelt jõuda
+			$returnData->alertType = 'danger';
+			$returnData->message = 'Broneerimiseks logige sisee';
+			echo json_encode($returnData);
+			return;
+		}
+		
+		$this->form_validation->set_rules('kuupäev', 'Kuupäev', 'regex_match[/^\d\d\/\d\d\/\d\d\d\d$/]',
+			array(
+				'regex_match' => 'Ebasobiv kuupäeva formaat'
+			)
+		);
+		$this->form_validation->set_rules('kellaaeg', 'Kellaaeg', 'required|regex_match[/^\d\d:\d\d - \d\d:\d\d$/]',
+			array(
+				'required' => 'Valige sobiv kellaaeg',
+				'regex_match' => 'Ebasobiv kellaaja formaat'
+			)
+		);
+		$this->form_validation->set_rules('pakett', 'Pakett', 'required|regex_match[/^Pakett [12]$/]',
+			array(
+				'required' => 'Valige sobiv pakett',
+				'regex_match' => 'Ebasobiv paketi formaat'
+			)
+		);
+		
+		if ($this->form_validation->run() == FALSE) {
+			// Form validation ei läinud läbi
+			$errorsStr = trim(validation_errors());
+			$errors = explode("\n", $errorsStr);
+			$returnMessage = "";
+			foreach ($errors as $error) {
+				$returnMessage .= $error;
+			}
+			$returnData->alertType = 'danger';
+			$returnData->message = $returnMessage;
+		}
+		else {
+			// Validation läks läbi
+			$kuupäevInput = $this->input->post('kuupäev');
+			$kuupäevTükid = explode('/', $kuupäevInput);
+			$kuupäevStr = $kuupäevTükid[2] . '-' . $kuupäevTükid[1] . '-' . $kuupäevTükid[0];
+			
+			$data = array(
+				'email' => $_SESSION['email'],
+				'pakett' => $this->input->post('pakett'),
+				'kellaaeg' => $this->input->post('kellaaeg'),
+				'kuupäev' => $kuupäevStr
+			);
+			
+			$returnData->alertType = 'success';
+			$returnData->message = 'Broneering kinnitatud. Broneeringuid saate näha profiililehelt.';
+		}
 		echo json_encode($returnData);
 	}
 }

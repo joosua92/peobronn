@@ -12,6 +12,8 @@
 		<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/page.js"></script>
 		<script src="https://apis.google.com/js/platform.js?onload=onGoogleLoad" async defer></script>
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery-ui.css">
+		<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
 	</head>
 	<body>
 		<div class="wrapper">

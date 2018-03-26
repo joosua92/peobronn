@@ -57,10 +57,31 @@ $(document).ready(function() {
 		};
 		$.post("input/logout", fun);
 	});
+	
+	// Submit registration form
+	$("#reserv-form").submit(function(event){
+		event.preventDefault();
+		var formData = $("#reserv-form").serialize();
+		var fun = function(data) {
+			var returnData = JSON.parse(data);
+			showAlert(returnData.alertType, returnData.message);
+		};
+		$.post("input/reserv", formData, fun);
+	});
+});
+
+$(document).ready(function() {
+	// Create datepicker
+	$("#datepicker").datepicker({
+		altField: "#kuupäev",
+		dateFormat: "dd/mm/yy"
+	});
+	// Disable typing input
+	$('#kuupäev').attr('readonly', true);
 });
 
 function showAlert(type, message) {
-	// Shows the message in an alert box of specified type (in case "#alert-box" exists)
+	// Shows the message in an alert box of specified type (in case #alert-box exists)
 	var alertBox = $("#alert-box");
 	alertBox.html(message);
 	alertBox.removeClass("alert-success");

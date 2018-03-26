@@ -33,27 +33,58 @@ class Pages extends CI_Controller {
 	}
 	
 	public function broneerimine() {
-		$data['title'] = "Broneerimine - Mängumaailm";
-		$this->loadPage("broneerimine", $data);
+		if (!isset($_SESSION['email'])) {
+			$this->session->set_flashdata('alertType', 'info');
+			$this->session->set_flashdata('alertMessage', 'Broneerimiseks on vaja sisse logida');
+			redirect('sisene');
+		}
+		else {
+			$data['title'] = "Broneerimine - Mängumaailm";
+			$this->loadPage("broneerimine", $data);
+		}
 	}
 	
 	public function sisene() {
-		$data['title'] = "Sisene - Mängumaailm";
-		$this->loadPage("sisene", $data);
+		if (isset($_SESSION['email'])) {
+			redirect('profiil');
+		}
+		else {
+			$data['title'] = "Sisene - Mängumaailm";
+			$this->loadPage("sisene", $data);
+		}
 	}
 	
 	public function registreeru() {
-		$data['title'] = "Registreeru - Mängumaailm";
-		$this->loadPage("registreeru", $data);
+		if (isset($_SESSION['email'])) {
+			redirect('profiil');
+		}
+		else {
+			$data['title'] = "Registreeru - Mängumaailm";
+			$this->loadPage("registreeru", $data);
+		}
 	}
 	
 	public function profiil() {
-		$data['title'] = "Profiil - Mängumaailm";
-		$this->loadPage("profiil", $data);
+		if (!isset($_SESSION['email'])) {
+			$this->session->set_flashdata('alertType', 'info');
+			$this->session->set_flashdata('alertMessage', 'Profiili nägemiseks on vaja sisse logida');
+			redirect('sisene');
+		}
+		else {
+			$this->load->model("main_model");
+			// TODO: display broneeringud
+			$data['title'] = "Profiil - Mängumaailm";
+			$this->loadPage("profiil", $data);
+		}
 	}
 	
 	public function valjund() {
-		$data['title'] = "Olete välja logitud - Mängumaailm";
-		$this->loadPage("valjund", $data);
+		if (isset($_SESSION['email'])) {
+			redirect('profiil');
+		}
+		else {
+			$data['title'] = "Olete välja logitud - Mängumaailm";
+			$this->loadPage("valjund", $data);
+		}
 	}
 }

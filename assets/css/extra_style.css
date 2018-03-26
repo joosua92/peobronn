@@ -20,6 +20,11 @@ html, body {
 	font-size: 140%;
 }
 
+#lisainfo {
+	padding-top: 30px;
+	font-size: 140%;
+}
+
 #küsimused dd {
     padding-top: 6px;
     padding-right: 0px;
@@ -38,11 +43,6 @@ html, body {
 	padding-left: 5px;
 	padding-right: 0px;
 	padding-bottom: 10px;
-}
-
-#pakett, #kellaaeg {
-	max-width: 30%;
-	min-width: 10em;
 }
 
 .navbar-inverse .navbar-nav > .active > a,
@@ -84,4 +84,8 @@ h3 {
 
 #logout-message {
 	text-align: center;
+}
+
+#datepicker {
+	padding: 10px;
 }

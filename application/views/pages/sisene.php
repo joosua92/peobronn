@@ -4,6 +4,14 @@
 			<div class="page-header">
 				<h1>Sisene</h1>
 			</div>
+			<?php
+			if (isset($_SESSION['alertType'])) {
+				echo '<div class="alert alert-' . $_SESSION['alertType'] . '" role="alert" id="alert-box">' . $_SESSION['alertMessage'] . '</div>';
+			}
+			else {
+				echo '<div class="alert collapse" role="alert" id="alert-box"></div>';
+			}
+			?>
 			<div class="alert collapse" role="alert" id="alert-box">
 			</div>
 			<div class="col-md-6">
@@ -21,7 +29,7 @@
 			</div>
 			<div class="col-md-6">
 				<div id="google-login-container">
-					<div><b>Või sisene läbi Google<b></div>
+					<div><b>Sisene läbi Google<b></div>
 					<div class="g-signin2" data-onsuccess="onSignIn"></div>
 				</div>
 			</div>

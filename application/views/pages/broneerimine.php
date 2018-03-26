@@ -8,17 +8,20 @@
 			<li class="breadcrumb-item active" aria-current="page">Broneerimine</li>
 		</ol>
 	</nav>
+	<div class="alert collapse" role="alert" id="alert-box">
+	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<form>
+			<div class="col-md-3">
+				<form action="input/reserv" method="post" id="reserv-form">
 					<div class="form-group">
-						<label for="date">Kuupäev:</label>
-						<input type="text" class="form-control" id="date" placeholder="18-03-2018" name="date">
+						<label for="kuupäev">Vali kuupäev:</label>
+						<div id="datepicker"></div>
+						<input type="text" class="form-control" id="kuupäev" name="kuupäev">
 					</div>
 					<div class="form-group">
 						<label for="kellaaeg">Vali kellaaeg:</label>
-						<select class="form-control" id="kellaaeg">
+						<select class="form-control" id="kellaaeg" name="kellaaeg">
 							<option selected="selected" disabled="disabled" hidden="hidden">-</option>
 							<option>10:00 - 11:00</option>
 							<option>11:00 - 12:00</option>
@@ -33,7 +36,7 @@
 					</div>
 					<div class="form-group">
 						<label for="pakett">Vali pakett:</label>
-						<select class="form-control" id="pakett">
+						<select class="form-control" id="pakett" name="pakett">
 							<option selected="selected" disabled="disabled" hidden="hidden">-</option>
 							<option>Pakett 1</option>
 							<option>Pakett 2</option>
@@ -42,8 +45,10 @@
 					<button type="submit" class="btn btn-default">Broneeri</button>
 				</form>
 			</div>
-			<div class="col-md-6">
-				<!-- KALENDER JA AJA VALIMINE -->
+			<div class="col-md-6 col-md-offset-3" id="lisainfo">
+				<p>Broneeringuid saab tühistada profiililehelt.</p>
+				<p>Pakett 1 - max 10 inimest</p>
+				<p>Pakett 2 - 10+ inimest</p>
 			</div>
 		</div>
 	</div>
