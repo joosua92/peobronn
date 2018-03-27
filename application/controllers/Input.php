@@ -118,6 +118,7 @@ class Input extends CI_Controller {
 				return;
 			}
 			else {
+				$_SESSION['id'] = $account->id;
 				$_SESSION['email'] = $account->email;
 				$_SESSION['eesnimi'] = $account->eesnimi;
 				$_SESSION['perenimi'] = $account->perenimi;
@@ -160,6 +161,7 @@ class Input extends CI_Controller {
 			$account = $result[0];
 			if ($account->liik == 'GOOGLE') {
 				// Kasutaja olemas
+				$_SESSION['id'] = $account->id;
 				$_SESSION['email'] = $account->email;
 				$_SESSION['eesnimi'] = $account->eesnimi;
 				$_SESSION['perenimi'] = $account->perenimi;
@@ -184,6 +186,7 @@ class Input extends CI_Controller {
 				'liik' => 'GOOGLE'
 			);
 			$this->main_model->insert_user($data);
+			$_SESSION['id'] = ($this->main_model->get_user($this->input->post('email')))[0]->id;
 			$_SESSION['email'] = $this->input->post('email');
 			$_SESSION['eesnimi'] = $this->input->post('eesnimi');
 			$_SESSION['perenimi'] = $this->input->post('perenimi');

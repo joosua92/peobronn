@@ -73,6 +73,15 @@ class Pages extends CI_Controller {
 		else {
 			$this->load->model("main_model");
 			// TODO: display broneeringud
+			$user_picture_path = base_url() . 'assets/images/placeholder_profile_picture.png';
+			$pictures = scandir('user_files');
+			foreach ($pictures as $pic) {
+				if (preg_match('/^' . $_SESSION['id'] . '_pic\./', $pic) == 1) {
+					$user_picture_path = base_url() . 'user_files/' . $pic;
+					break;
+				}
+			}
+			$data['profile_picture_path'] = $user_picture_path;
 			$data['title'] = "Profiil - Mängumaailm";
 			$this->loadPage("profiil", $data);
 		}
