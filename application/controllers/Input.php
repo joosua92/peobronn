@@ -50,6 +50,7 @@ class Input extends CI_Controller {
 		else {
 			// Validation läks läbi
 			$this->load->model("main_model");
+			$this->load->model("email_model");
 			$data = array(
 				'eesnimi' => $this->input->post('eesnimi'),
 				'perenimi' => $this->input->post('perenimi'),
@@ -58,6 +59,7 @@ class Input extends CI_Controller {
 				'liik' => 'TAVALINE'
 			);
 			$this->main_model->insert_user($data);
+			$this->email_model->send_registration_email($this->input->post('email'));
 			
 			$returnData->alertType = 'success';
 			$returnData->message = 'Registreerumine õnnestus. <a href=' . base_url() . 'sisene>Sisene</a>';

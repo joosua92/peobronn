@@ -35,3 +35,4 @@ assets/images/Thumbs.db
 application/config/database.php
 assets/css/images/Thumbs.db
 user_files/*
+application/config/email.php
