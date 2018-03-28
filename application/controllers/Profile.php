@@ -2,79 +2,53 @@
 class Profile extends CI_Controller {
 	
 	public function picture_upload() {
-		$this->load->helper('form');
-		if (!isset($_SESSION['id'])) {
+		if (!isset($_SESSION['user_id'])) {
 			$this->session->set_flashdata('alertType', 'danger');
-			$this->session->set_flashdata('alertMessage', 'Faili üleslaadimiseks peate olema sisse logitud');
+			$this->session->set_flashdata('alertMessage', 'Faili üleslaadimiseks peate olema sisse logitud.');
 			redirect('profiil');
 		}
-		$config['upload_path'] = './user_files/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size'] = '1000';
-		$config['max_width'] = '2048';
-		$config['max_height'] = '2048';
-		
-		$old_pic = $this->get_user_picture();
+		$this->load->model('files_model');
+		$old_pic = $this->files_model->user_picture_path($_SESSION['user_id']);
 		
 		$this->load->library('upload', $config);
-		if ($this->upload->do_upload('kasutaja-fail')) {
-			if ($old_pic != false) {
-				unlink($old_pic);
-			}
-			// Rename new pic, while keeping extension
-			$img_data = $this->upload->data();
-            $new_imgname = $_SESSION['id'] . '_pic' . $img_data['file_ext'];
-            $new_imgpath = $img_data['file_path'] . $new_imgname;
-            rename($img_data['full_path'], $new_imgpath);
-			
+		$returnData = $this->files_model->upload_user_picture();
+		if ($returnData == "success") {
 			$this->session->set_flashdata('alertType', 'success');
 			$this->session->set_flashdata('alertMessage', 'Pilt edukalt üles laetud');
 		}
 		else {
-			$errorsStr = trim($this->upload->display_errors());
-			$errors = explode("\n", $errorsStr);
-			$returnMessage = "";
-			foreach ($errors as $error) {
-				$returnMessage .= $error;
-			}
 			$this->session->set_flashdata('alertType', 'danger');
-			$this->session->set_flashdata('alertMessage', $returnMessage);
+			// Translate errors to estonian
+			$returnData = str_replace('The upload path does not appear to be valid.', 'Üleslaadimise kaust ei ole saadav.', $returnData);
+			$returnData = str_replace('You did not select a file to upload.', 'Valige pilt mida üles laadida (max 1MB).', $returnData);
+			$returnData = str_replace('The image you are attempting to upload doesn\'t fit into the allowed dimensions.', 'Pildi mõõtmed on liiga suured (max 2048 x 2048).', $returnData);
+	
+			$this->session->set_flashdata('alertMessage', $returnData);
 		}
 		redirect('profiil');
 	}
 	
 	public function picture_remove() {
-		if (!isset($_SESSION['id'])) {
+		if (!isset($_SESSION['user_id'])) {
 			$this->session->set_flashdata('alertType', 'danger');
-			$this->session->set_flashdata('alertMessage', 'Faili eemaldamiseks peate olema sisse logitud');
+			$this->session->set_flashdata('alertMessage', 'Faili eemaldamiseks peate olema sisse logitud.');
 			redirect('profi1iil');
 		}
 		
-		$user_pic = $this->get_user_picture();
+		$this->load->model('files_model');
+		$user_pic = $this->files_model->user_picture_path($_SESSION['user_id']);
 		if ($user_pic == false) {
 			$this->session->set_flashdata('alertType', 'info');
-			$this->session->set_flashdata('alertMessage', 'Teil pole ühtegi pilti mida eemaldada');
+			$this->session->set_flashdata('alertMessage', 'Teil pole ühtegi pilti mida eemaldada.');
 		}
-		else if (unlink($user_pic)) {
+		else if ($this->files_model->delete_user_picture($_SESSION['user_id'])) {
 			$this->session->set_flashdata('alertType', 'success');
-			$this->session->set_flashdata('alertMessage', 'Pilt edukalt eemaldatud');
+			$this->session->set_flashdata('alertMessage', 'Pilt edukalt eemaldatud.');
 		}
 		else {
 			$this->session->set_flashdata('alertType', 'danger');
-			$this->session->set_flashdata('alertMessage', 'Faili kustutamine ebaõnnestus');
+			$this->session->set_flashdata('alertMessage', 'Faili kustutamine ebaõnnestus.');
 		}
 		redirect('profiil');
-	}
-	
-	private function get_user_picture() {
-		$user_picture_path = false;
-		$pictures = scandir('user_files');
-		foreach ($pictures as $pic) {
-			if (preg_match('/^' . $_SESSION['id'] . '_pic\./', $pic) == 1) {
-				$user_picture_path = 'user_files/' . $pic;
-				break;
-			}
-		}
-		return $user_picture_path;
 	}
 }

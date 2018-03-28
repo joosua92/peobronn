@@ -39,6 +39,20 @@
 			</div>
 			<div class="col-md-6">
 				<h3>Broneeringud</h3>
+				<?php
+				if (count($reservations) == 0) {
+					echo '<p>Teil pole ühtegi broneeringut.</p>';
+				}
+				else {
+					echo '<table class="table">';
+					echo '<tr><th>Kuupäev</th><th>Kellaaeg</th><th>Pakett</th><th></th></tr>';
+					foreach ($reservations as $reservation) {
+						$cancel_form = '<form action="input/cancel_reservation/' . $reservation->id . '" method="post"><input type="submit" value="Tühista" class="btn-link"></form>';
+						echo '<tr><td>' . $reservation->kuupäev . '</td><td>' . $reservation->kellaaeg . '</td><td>' . $reservation->pakett . '</td><td>' . $cancel_form . '</td></tr>';
+					}
+					echo '</table>';
+				}
+				?>
 			</div>
 		</div>
 	</div>

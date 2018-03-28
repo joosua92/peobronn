@@ -20,9 +20,10 @@ $(document).ready(function() {
 	$("#register-form").submit(function(event){
 		event.preventDefault();
 		var formData = $("#register-form").serialize();
+		formData += "&ajax=true";
 		var fun = function(data) {
 			var returnData = JSON.parse(data);
-			showAlert(returnData.alertType, returnData.message);
+			showAlert(returnData.alertType, returnData.alertMessage);
 		};
 		$.post("input/register", formData, fun);
 	});
@@ -31,13 +32,14 @@ $(document).ready(function() {
 	$("#login-form").submit(function(event){
 		event.preventDefault();
 		var formData = $("#login-form").serialize();
+		formData += "&ajax=true";
 		var fun = function(data) {
 			var returnData = JSON.parse(data);
 			if (returnData.hasOwnProperty("redirect")) {
 				window.location.href = returnData.redirect;
 			}
 			else {
-				showAlert(returnData.alertType, returnData.message);
+				showAlert(returnData.alertType, returnData.alertMessage);
 			}
 		};
 		$.post("input/login", formData, fun)
@@ -55,16 +57,18 @@ $(document).ready(function() {
 				window.location.href = returnData.redirect;
 			}
 		};
-		$.post("input/logout", fun);
+		var data = "ajax=true";
+		$.post("input/logout", data, fun);
 	});
 	
-	// Submit registration form
+	// Submit reservation form with AJAX
 	$("#reserv-form").submit(function(event){
 		event.preventDefault();
 		var formData = $("#reserv-form").serialize();
+		formData += "&ajax=true";
 		var fun = function(data) {
 			var returnData = JSON.parse(data);
-			showAlert(returnData.alertType, returnData.message);
+			showAlert(returnData.alertType, returnData.alertMessage);
 		};
 		$.post("input/reserv", formData, fun);
 	});
@@ -108,11 +112,11 @@ function onSignIn(googleUser) {
 			window.location.href = returnData.redirect;
 		}
 		else {
-			showAlert(returnData.alertType, returnData.message);
+			showAlert(returnData.alertType, returnData.alertMessage);
 			googleSignOut();
 		}
 	}
-	$.post("input/google", userData, fun);
+	$.post("input/google_login", userData, fun);
 }
 
 function googleSignOut() {

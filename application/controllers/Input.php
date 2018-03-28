@@ -2,42 +2,43 @@
 class Input extends CI_Controller {
 	
 	public function register() {
+		$ajax = isset($_POST['ajax']);
+		$returnData = new stdClass();
+		
 		$this->form_validation->set_rules('eesnimi', 'Eesnimi', 'required|regex_match[/^[a-zA-ZõäöüÕÄÖÜ -]+$/]',
 			array(
-				'required' => 'Eesnime väli peab olema täidetud',
-				'regex_match' => 'Ebasobiv eesnimi'
+				'required' => 'Eesnime väli peab olema täidetud.',
+				'regex_match' => 'Ebasobiv eesnimi.'
 			)
 		);
 		$this->form_validation->set_rules('perenimi', 'Perenimi', 'required|regex_match[/^[a-zA-ZõäöüÕÄÖÜ]+$/]',
 			array(
-				'required' => 'Perenime väli peab olema täidetud',
-				'regex_match' => 'Ebasobiv perenimi'
+				'required' => 'Perenime väli peab olema täidetud.',
+				'regex_match' => 'Ebasobiv perenimi.'
 			)
 		);
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[kasutaja.email]', 
 			array(
-				'required' => 'E-maili väli peab olema täidetud',
-				'valid_email' => 'Ebasobiv e-mail',
-				'is_unique' => 'Sisestatud e-mail on juba kasutusel'
+				'required' => 'E-maili väli peab olema täidetud.',
+				'valid_email' => 'Ebasobiv e-mail.',
+				'is_unique' => 'Sisestatud e-mail on juba kasutusel.'
 			)
 		);
 		$this->form_validation->set_rules('salasõna', 'Salasõna', 'required|min_length[8]',
 			array(
-				'required' => 'Salasõna peab olema täidetud',
-				'min_length' => 'Salasõna pikkus peab olema vähemalt 8'
+				'required' => 'Salasõna peab olema täidetud.',
+				'min_length' => 'Salasõna pikkus peab olema vähemalt 8.'
 			)
 		);
 		$this->form_validation->set_rules('korda-salasõna', 'Korda salasõna', 'required|matches[salasõna]',
 			array(
-				'required' => 'Korda oma salasõna uuesti',
-				'matches' => 'Salasõnad ei kattu'
+				'required' => 'Korda oma salasõna uuesti.',
+				'matches' => 'Salasõnad ei kattu.'
 			)
 		);
 		
-		$returnData = new stdClass();
-		
 		if ($this->form_validation->run() == FALSE) {
-			// Form validation ei läinud läbi
+			// Form validation didn't pass
 			$errorsStr = trim(validation_errors());
 			$errors = explode("\n", $errorsStr);
 			$returnMessage = "";
@@ -45,11 +46,11 @@ class Input extends CI_Controller {
 				$returnMessage .= $error;
 			}
 			$returnData->alertType = 'danger';
-			$returnData->message = $returnMessage;
+			$returnData->alertMessage = $returnMessage;
 		}
 		else {
-			// Validation läks läbi
-			$this->load->model("main_model");
+			// Validation passed
+			$this->load->model("database_model");
 			$this->load->model("email_model");
 			$data = array(
 				'eesnimi' => $this->input->post('eesnimi'),
@@ -58,25 +59,31 @@ class Input extends CI_Controller {
 				'salasõna' => password_hash($this->input->post('salasõna'), PASSWORD_BCRYPT),
 				'liik' => 'TAVALINE'
 			);
-			$this->main_model->insert_user($data);
+			$this->database_model->insert_user($data);
 			$this->email_model->send_registration_email($this->input->post('email'));
 			
 			$returnData->alertType = 'success';
-			$returnData->message = 'Registreerumine õnnestus. <a href=' . base_url() . 'sisene>Sisene</a>';
+			$returnData->alertMessage = 'Registreerumine õnnestus. <a href=' . base_url() . 'sisene>Sisene</a>.';
 		}
-		
-		echo json_encode($returnData);
-	}
-	
+		if ($ajax) {
+			echo json_encode($returnData);
+		}
+		else {
+			$this->session->set_flashdata('alertType', $returnData->alertType);
+			$this->session->set_flashdata('alertMessage', $returnData->alertMessage);
+			redirect('registreeru');
+		}
+	}	
 	
 	public function login() {
-		$this->form_validation->set_rules('email', 'Email', 'required', array('required' => 'Palun sisesta e-mail'));
-		$this->form_validation->set_rules('salasõna', 'Salasõna', 'required', array('required' => 'Salasõna väli peab olema täidetud'));
+		$ajax = isset($_POST['ajax']);
 		$returnData = new stdClass();
 		
-		if ($this->form_validation->run() == FALSE)
-		{
-			// Form validation ei läinud läbi
+		$this->form_validation->set_rules('email', 'Email', 'required', array('required' => 'Palun sisesta e-mail.'));
+		$this->form_validation->set_rules('salasõna', 'Salasõna', 'required', array('required' => 'Salasõna väli peab olema täidetud.'));
+		
+		if ($this->form_validation->run() == FALSE) {
+			// Form validation didn't pass
 			$errorsStr = trim(validation_errors());
 			$errors = explode("\n", $errorsStr);
 			$returnMessage = "";
@@ -84,55 +91,57 @@ class Input extends CI_Controller {
 				$returnMessage .= $error;
 			}
 			$returnData->alertType = 'danger';
-			$returnData->message = $returnMessage;
-			echo json_encode($returnData);
-			return;
+			$returnData->alertMessage = $returnMessage;
 		}
-		else
-		{
-			// Validation läks läbi
+		else {
+			// Validation passed
 			$email = $this->input->post('email');
 			$salasõna = $this->input->post('salasõna');
-			$this->load->model("main_model");
-			$results = $this->main_model->get_user($email);
+			$this->load->model("database_model");
+			$results = $this->database_model->get_user($email);
 			if (count($results) < 1) {
 				$returnData->alertType = 'danger';
-				$returnData->message = 'Sellise e-mailiga kasutajat ei ole';
-				echo json_encode($returnData);
-				return;
-			}
-			$account = $results[0];
-			if ($account->liik != 'TAVALINE') {
-				$returnData->alertType = 'danger';
-				if ($account->liik != 'TAVALINE') {
-					$returnData->message = 'Selle e-mailiga kasutajaga peab sisse logima läbi Google';
-				}
-				else {
-					$returnData->message = 'Selle e-mailiga kasutajaga peab sisse logima ID-kaardiga';
-				}
-				echo json_encode($returnData);
-				return;
-			}
-			if (!password_verify($salasõna, $account->salasõna)) {
-				$returnData->alertType = 'danger';
-				$returnData->message = 'Vale salasõna';
-				echo json_encode($returnData);
-				return;
+				$returnData->alertMessage = 'Sellise e-mailiga kasutajat ei ole.';
 			}
 			else {
-				$_SESSION['id'] = $account->id;
-				$_SESSION['email'] = $account->email;
-				$_SESSION['eesnimi'] = $account->eesnimi;
-				$_SESSION['perenimi'] = $account->perenimi;
-				$_SESSION['liik'] = $account->liik;
-				$returnData->redirect = "profiil";
-				echo json_encode($returnData);
-				return;
+				$account = $results[0];
+				if ($account->liik != 'TAVALINE') {
+					$returnData->alertType = 'danger';
+					if ($account->liik != 'TAVALINE') {
+						$returnData->alertMessage = 'Selle e-mailiga kasutajaga peab sisse logima läbi Google.';
+					}
+					else {
+						$returnData->alertMessage = 'Selle e-mailiga kasutajaga peab sisse logima ID-kaardiga.';
+					}
+				}
+				else if (!password_verify($salasõna, $account->salasõna)) {
+					$returnData->alertType = 'danger';
+					$returnData->alertMessage = 'Vale salasõna';
+				}
+				else {
+					$_SESSION['user_id'] = $account->id;
+					$_SESSION['email'] = $account->email;
+					$_SESSION['eesnimi'] = $account->eesnimi;
+					$_SESSION['perenimi'] = $account->perenimi;
+					$_SESSION['liik'] = $account->liik;
+					$returnData->redirect = "profiil";
+				}
 			}
+		}
+		if ($ajax) {
+			echo json_encode($returnData);
+		}
+		else {
+			if (property_exists($returnData->alertType) && property_exists($returnData->alertMessage)) {
+				$this->session->set_flashdata('alertType', $returnData->alertType);
+				$this->session->set_flashdata('alertMessage', $returnData->alertMessage);
+			}
+			redirect('profiil');
 		}
 	}
 	
 	public function logout() {
+		$ajax = isset($_POST['ajax']);
 		$returnData = new stdClass();
 		if (isset($_SESSION['liik']) && $_SESSION['liik'] == 'GOOGLE') {
 			$returnData->logoutStatus = 'google';
@@ -143,27 +152,32 @@ class Input extends CI_Controller {
 			$returnData->redirect = 'valjund';
 		}
 		session_unset();
-		echo json_encode($returnData);
+		if ($ajax) {
+			echo json_encode($returnData);
+		}
+		else {
+			redirect('valjund');
+		}
 	}
 	
-	public function google() {
-		$this->load->model("main_model");
+	public function google_login() {
+		$this->load->model("database_model");
 		$returnData = new stdClass();
 		
 		if (isset($_SESSION['email']) && $_SESSION['email'] == $this->input->post('email')) {
-			// Juba sisse logitud
+			// Already logged in
 			$returnData->loginStatus = 'already in';
 			$returnData->redirect = 'profiil';
 			echo json_encode($returnData);
 			return;
 		}
 		
-		$result = $this->main_model->get_user($this->input->post('email'));
+		$result = $this->database_model->get_user($this->input->post('email'));
 		if (count($result) > 0) {
 			$account = $result[0];
 			if ($account->liik == 'GOOGLE') {
-				// Kasutaja olemas
-				$_SESSION['id'] = $account->id;
+				// User has previously logged in with the same account
+				$_SESSION['user_id'] = $account->id;
 				$_SESSION['email'] = $account->email;
 				$_SESSION['eesnimi'] = $account->eesnimi;
 				$_SESSION['perenimi'] = $account->perenimi;
@@ -172,14 +186,14 @@ class Input extends CI_Controller {
 				$returnData->redirect = 'profiil';
 			}
 			else {
-				// Selle e-mailiga kasutaja juba olemas, aga pole GOOGLE tüüpi
+				// User with this e-mail already exists, but is not of type GOOGLE
 				$returnData->loginStatus = 'õfail';
 				$returnData->alertType = 'danger';
-				$returnData->message = 'Selle e-mailiga kasutaja juba eksisteerib';
+				$returnData->alertMessage = 'Selle e-mailiga kasutaja juba eksisteerib.';
 			}
 		}
 		else {
-			// Kasutaja pole varem lehel sisenenud, pannakse andmed andmebaasi
+			// User hasn't logged into the site before, data inserted into database
 			$data = array(
 				'eesnimi' => $this->input->post('eesnimi'),
 				'perenimi' => $this->input->post('perenimi'),
@@ -187,8 +201,8 @@ class Input extends CI_Controller {
 				'salasõna' => '',
 				'liik' => 'GOOGLE'
 			);
-			$this->main_model->insert_user($data);
-			$_SESSION['id'] = ($this->main_model->get_user($this->input->post('email')))[0]->id;
+			$this->database_model->insert_user($data);
+			$_SESSION['user_id'] = ($this->database_model->get_user($this->input->post('email')))[0]->id;
 			$_SESSION['email'] = $this->input->post('email');
 			$_SESSION['eesnimi'] = $this->input->post('eesnimi');
 			$_SESSION['perenimi'] = $this->input->post('perenimi');
@@ -201,61 +215,85 @@ class Input extends CI_Controller {
 	}
 	
 	public function reserv() {
+		$ajax = isset($_POST['ajax']);
 		$returnData = new stdClass();
-		$this->load->model("main_model");
+		
+		$this->load->model("database_model");
 		if (!isset($_SESSION['email'])) {
 			// Ei tohiks siia tegelt jõuda
 			$returnData->alertType = 'danger';
-			$returnData->message = 'Broneerimiseks logige sisee';
-			echo json_encode($returnData);
-			return;
-		}
-		
-		$this->form_validation->set_rules('kuupäev', 'Kuupäev', 'regex_match[/^\d\d\/\d\d\/\d\d\d\d$/]',
-			array(
-				'regex_match' => 'Ebasobiv kuupäeva formaat'
-			)
-		);
-		$this->form_validation->set_rules('kellaaeg', 'Kellaaeg', 'required|regex_match[/^\d\d:\d\d - \d\d:\d\d$/]',
-			array(
-				'required' => 'Valige sobiv kellaaeg',
-				'regex_match' => 'Ebasobiv kellaaja formaat'
-			)
-		);
-		$this->form_validation->set_rules('pakett', 'Pakett', 'required|regex_match[/^Pakett [12]$/]',
-			array(
-				'required' => 'Valige sobiv pakett',
-				'regex_match' => 'Ebasobiv paketi formaat'
-			)
-		);
-		
-		if ($this->form_validation->run() == FALSE) {
-			// Form validation ei läinud läbi
-			$errorsStr = trim(validation_errors());
-			$errors = explode("\n", $errorsStr);
-			$returnMessage = "";
-			foreach ($errors as $error) {
-				$returnMessage .= $error;
-			}
-			$returnData->alertType = 'danger';
-			$returnData->message = $returnMessage;
+			$returnData->alertMessage = 'Broneerimiseks logige sisse.';
 		}
 		else {
-			// Validation läks läbi
-			$kuupäevInput = $this->input->post('kuupäev');
-			$kuupäevTükid = explode('/', $kuupäevInput);
-			$kuupäevStr = $kuupäevTükid[2] . '-' . $kuupäevTükid[1] . '-' . $kuupäevTükid[0];
-			
-			$data = array(
-				'email' => $_SESSION['email'],
-				'pakett' => $this->input->post('pakett'),
-				'kellaaeg' => $this->input->post('kellaaeg'),
-				'kuupäev' => $kuupäevStr
+			$this->form_validation->set_rules('kuupäev', 'Kuupäev', 'regex_match[/^\d\d\/\d\d\/\d\d\d\d$/]',
+				array(
+					'regex_match' => 'Ebasobiv kuupäeva formaat'
+				)
+			);
+			$this->form_validation->set_rules('kellaaeg', 'Kellaaeg', 'required|regex_match[/^\d\d:\d\d - \d\d:\d\d$/]',
+				array(
+					'required' => 'Valige sobiv kellaaeg',
+					'regex_match' => 'Ebasobiv kellaaja formaat'
+				)
+			);
+			$this->form_validation->set_rules('pakett', 'Pakett', 'required|regex_match[/^Pakett [12]$/]',
+				array(
+					'required' => 'Valige sobiv pakett',
+					'regex_match' => 'Ebasobiv paketi formaat'
+				)
 			);
 			
-			$returnData->alertType = 'success';
-			$returnData->message = 'Broneering kinnitatud. Broneeringuid saate näha profiililehelt.';
+			if ($this->form_validation->run() == FALSE) {
+				// Form validation ei läinud läbi
+				$errorsStr = trim(validation_errors());
+				$errors = explode("\n", $errorsStr);
+				$returnMessage = "";
+				foreach ($errors as $error) {
+					$returnMessage .= $error;
+				}
+				$returnData->alertType = 'danger';
+				$returnData->alertMessage = $returnMessage;
+			}
+			else {
+				// Validation läks läbi
+				$kuupäevInput = $this->input->post('kuupäev');
+				$kuupäevTükid = explode('/', $kuupäevInput);
+				$kuupäevStr = $kuupäevTükid[2] . '-' . $kuupäevTükid[1] . '-' . $kuupäevTükid[0];
+				// Extra check for (date, time) combination uniqueness. User shouldn't be able to select such a combination.
+				$sameReservations = $this->database_model->get_reservation($kuupäevStr, $this->input->post('kellaaeg'));
+				if (count($sameReservations) > 0) {
+					$returnData->alertType = 'danger';
+					$returnData->alertMessage = 'See aeg on juba broneeritud.';
+				}
+				else {
+					$data = array(
+						'email' => $_SESSION['email'],
+						'pakett' => $this->input->post('pakett'),
+						'kellaaeg' => $this->input->post('kellaaeg'),
+						'kuupäev' => $kuupäevStr
+					);
+					$this->database_model->insert_reservation($data);
+					
+					$returnData->alertType = 'success';
+					$returnData->alertMessage = 'Broneering kinnitatud. Broneeringuid saate näha profiililehelt.';
+				}
+			}
 		}
-		echo json_encode($returnData);
+		if ($ajax) {
+			echo json_encode($returnData);
+		}
+		else {
+			$this->session->set_flashdata('alertType', $returnData->alertType);
+			$this->session->set_flashdata('alertMessage', $returnData->alertMessage);
+			redirect('broneeri');
+		}
+	}
+	
+	public function cancel_reservation($reservation_id) {
+		$this->load->model('database_model');
+		$this->database_model->remove_reservation($reservation_id);
+		$this->session->set_flashdata('alertType', 'success');
+		$this->session->set_flashdata('alertMessage', 'Broneering tühistatud.');
+		redirect('profiil');
 	}
 }

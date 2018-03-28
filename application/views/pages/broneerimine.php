@@ -46,7 +46,7 @@
 				</form>
 			</div>
 			<div class="col-md-6 col-md-offset-3" id="lisainfo">
-				<p>Broneeringuid saab tühistada profiililehelt.</p>
+				<p>Broneeringuid saab näha ja tühistada profiililehelt.</p>
 				<p>Pakett 1 - max 10 inimest</p>
 				<p>Pakett 2 - 10+ inimest</p>
 			</div>

@@ -1,7 +1,6 @@
 <?php
 class Pages extends CI_Controller {
 	
-	
 	private function loadPage($page, $data) {
 		if (!file_exists(APPPATH.'views/pages/' . $page . '.php')) {
 			show_404();
@@ -35,7 +34,7 @@ class Pages extends CI_Controller {
 	public function broneerimine() {
 		if (!isset($_SESSION['email'])) {
 			$this->session->set_flashdata('alertType', 'info');
-			$this->session->set_flashdata('alertMessage', 'Broneerimiseks on vaja sisse logida');
+			$this->session->set_flashdata('alertMessage', 'Broneerimiseks on vaja sisse logida.');
 			redirect('sisene');
 		}
 		else {
@@ -67,21 +66,18 @@ class Pages extends CI_Controller {
 	public function profiil() {
 		if (!isset($_SESSION['email'])) {
 			$this->session->set_flashdata('alertType', 'info');
-			$this->session->set_flashdata('alertMessage', 'Profiili nägemiseks on vaja sisse logida');
+			$this->session->set_flashdata('alertMessage', 'Profiili nägemiseks on vaja sisse logida.');
 			redirect('sisene');
 		}
 		else {
-			$this->load->model("main_model");
-			// TODO: display broneeringud
-			$user_picture_path = base_url() . 'assets/images/placeholder_profile_picture.png';
-			$pictures = scandir('user_files');
-			foreach ($pictures as $pic) {
-				if (preg_match('/^' . $_SESSION['id'] . '_pic\./', $pic) == 1) {
-					$user_picture_path = base_url() . 'user_files/' . $pic;
-					break;
-				}
+			$this->load->model("database_model");
+			$this->load->model("files_model");
+			$user_picture_path = $this->files_model->user_picture_path($_SESSION['user_id']);
+			if ($user_picture_path === false) {
+				$user_picture_path = base_url() . 'assets/images/placeholder_profile_picture.png';
 			}
 			$data['profile_picture_path'] = $user_picture_path;
+			$data['reservations'] = $this->database_model->get_reservations($_SESSION['email']);
 			$data['title'] = "Profiil - Mängumaailm";
 			$this->loadPage("profiil", $data);
 		}

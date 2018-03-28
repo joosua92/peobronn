@@ -41,6 +41,7 @@
 								else {
 									echo '<li><a href="' . base_url() . 'profiil">PROFIIL</a></li>';
 									echo '<li><a href="#" id="logout-link">VÄLJU</a></li>';
+									//echo '<li><form action="input/logout" method="post"><input class="btn-link" type="submit" value="VÄLJU"></form></li>';
 								}
 								?>
 							</ul>
