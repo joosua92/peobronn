@@ -92,4 +92,9 @@ class Pages extends CI_Controller {
 			$this->loadPage("valjund", $data);
 		}
 	}
+	
+	public function statistika() {
+		$data['title'] = "Külastajate statistika - Mängumaailm";
+		$this->loadPage("statistika", $data);
+	}
 }

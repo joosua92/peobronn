@@ -1,7 +1,21 @@
 footer {
 	background-color: DarkSlateGray;
-	color: White;
+	color: Gray;
 	padding: 40px;
+}
+
+
+
+.footer-link:link,
+.footer-link:visited {
+	color: DarkGray;
+	font-weight: normal;
+}
+
+.footer-link:hover,
+.footer-link:active {
+	color: LightGray;
+	font-weight: normal;
 }
 
 html, body {
