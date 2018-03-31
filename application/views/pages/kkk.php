@@ -10,20 +10,27 @@
 	</nav>
 	<div>
 		<dl id="küsimused">
-			<dt>Küsimus 1</dt>
-			<dd>Vastus 1</dd>
-			<dt>Küsimus 2</dt>
-			<dd>Vastus 2</dd>
-			<dt>Lorem ipsum dolor sit amet, consectetur adipiscing
-			elit, sed do eiusmod tempor incididunt ut labore et dolore?</dt>
-			<dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-			sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-			nisi ut aliquip ex ea commodo consequat.</dd>
-			<dt>Küsimus 4</dt>
-			<dd>Vastus 4</dd>
-			<dt>Küsimus 5</dt>
-			<dd>Vastus 5</dd>
+			<dt>Kellele on mängumaailm mõeldud?</dt>
+			<dd>Mängumaailm ootab kõiki seiklushimulisi alates 8ndast eluaastast, 
+			kes soovivad kogeda midagi erakordset ja ainulaadset. Ülemist vanusepiiri ei ole.</dd>
+			<dt>Mitu inimest mängumaailm mahutab?</dt>
+			<dd>Mugavalt 25-30 inimest.</dd>
+			<dt>Kas mängumaailmas saab maksta kaardiga?</dt>
+			<dd>Maksmine on võimalik nii sularahas, kaardiga kui ülekandega.</dd>
+			<dt>Kas oma toidud/joogid on lubatud kaasa võtta?</dt>
+			<dd>Toidud ja joogid on lubatud kaasa võtta Baasjaama peoruumi rentijal.</dd>
+			<dt>Kuidas reaalsest maailmast virtuaalreaalsusse põgenemine välja näeb?</dt>
+			<dd>Selleks tuleb pähe panna peakomplekt ja kätte võtta kaks pulti. Igaühele on eraldatud oma ala mängimiseks.</dd>
+			<dt>Kui pikalt võib virtuaalreaalsuses viibida?</dt>
+			<dd>Kindlat reeglit ei ole. Parimad mängud haaravad Sind tundideks.</dd>
+			<dt>Kui olen prillikandja, kas saan üldse virtuaalreaalsusprille kasutada?</dt>
+			<dd>Jah. Prille ei pea ära võtma, peakomplekt mahuvad isiklike prillide peale.</dd>
+			<dt>Kas teenus on hügieeniline?</dt>
+			<dd>Jah, peale igat kasutuskorda puhastame kõik seadmed.</dd>
+			<dt>Kas on oht ennast vigastada?</dt>
+			<dd>Kindlasti mitte. Sinu virtuaalne ruum on turvaliselt piiritletud.</dd>
+			<dt>Kas saan sõbraga koos virtuaalreaalsuses mängida?</dt>
+			<dd>Jah, sõltub valitud mängust.</dd>			
 		</dl> 
 	</div>
 </div>
