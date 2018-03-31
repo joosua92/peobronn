@@ -161,54 +161,70 @@ class Input extends CI_Controller {
 	}
 	
 	public function google_login() {
-		$this->load->model("database_model");
+		require_once APPPATH . 'third_party/google-api-php-client-2.2.1/vendor/autoload.php';
+		$CLIENT_ID = '883720088699-for1689vnajr1birt2hqrnam9bs7j6ku.apps.googleusercontent.com';
+		
 		$returnData = new stdClass();
-		
-		if (isset($_SESSION['email']) && $_SESSION['email'] == $this->input->post('email')) {
-			// Already logged in
-			$returnData->loginStatus = 'already in';
-			$returnData->redirect = 'profiil';
-			echo json_encode($returnData);
-			return;
-		}
-		
-		$result = $this->database_model->get_user($this->input->post('email'));
-		if (count($result) > 0) {
-			$account = $result[0];
-			if ($account->liik == 'GOOGLE') {
-				// User has previously logged in with the same account
-				$_SESSION['user_id'] = $account->id;
-				$_SESSION['email'] = $account->email;
-				$_SESSION['eesnimi'] = $account->eesnimi;
-				$_SESSION['perenimi'] = $account->perenimi;
-				$_SESSION['liik'] = $account->liik;
+		$idToken = $this->input->post('idToken');
+		$client = new Google_Client(['client_id' => $CLIENT_ID]);
+		$payload = $client->verifyIdToken($idToken);
+		if ($payload) {
+			// Valid token, user authenticated
+			$userEmail = $payload['email'];
+			$userFirstName = $payload['given_name'];
+			$userLastName = $payload['family_name'];
+			
+			$this->load->model("database_model");
+			if (isset($_SESSION['email']) && $_SESSION['email'] == $userEmail) {
+				// Already logged in
 				$returnData->loginStatus = 'already in';
 				$returnData->redirect = 'profiil';
+				echo json_encode($returnData);
+				return;
+			}
+			$result = $this->database_model->get_user($userEmail);
+			if (count($result) > 0) {
+				$account = $result[0];
+				if ($account->liik == 'GOOGLE') {
+					// User has previously logged in with the same account
+					$_SESSION['user_id'] = $account->id;
+					$_SESSION['email'] = $account->email;
+					$_SESSION['eesnimi'] = $account->eesnimi;
+					$_SESSION['perenimi'] = $account->perenimi;
+					$_SESSION['liik'] = $account->liik;
+					$returnData->loginStatus = 'already in';
+					$returnData->redirect = 'profiil';
+				}
+				else {
+					// User with this e-mail already exists, but is not of type GOOGLE
+					$returnData->loginStatus = 'fail';
+					$returnData->alertType = 'danger';
+					$returnData->alertMessage = 'Selle e-mailiga kasutaja juba eksisteerib.';
+				}
 			}
 			else {
-				// User with this e-mail already exists, but is not of type GOOGLE
-				$returnData->loginStatus = 'õfail';
-				$returnData->alertType = 'danger';
-				$returnData->alertMessage = 'Selle e-mailiga kasutaja juba eksisteerib.';
+				// User hasn't logged into the site before, data inserted into database
+				$data = array(
+					'eesnimi' => $userFirstName,
+					'perenimi' => $userLastName,
+					'email' => $userEmail,
+					'salasõna' => '',
+					'liik' => 'GOOGLE'
+				);
+				$this->database_model->insert_user($data);
+				$_SESSION['user_id'] = ($this->database_model->get_user($userEmail))[0]->id;
+				$_SESSION['email'] = $this->input->post('email');
+				$_SESSION['eesnimi'] = $this->input->post('eesnimi');
+				$_SESSION['perenimi'] = $this->input->post('perenimi');
+				$_SESSION['liik'] = 'GOOGLE';
+				$returnData->loginStatus = "success";
+				$returnData->redirect = "profiil";
 			}
-		}
-		else {
-			// User hasn't logged into the site before, data inserted into database
-			$data = array(
-				'eesnimi' => $this->input->post('eesnimi'),
-				'perenimi' => $this->input->post('perenimi'),
-				'email' => $this->input->post('email'),
-				'salasõna' => '',
-				'liik' => 'GOOGLE'
-			);
-			$this->database_model->insert_user($data);
-			$_SESSION['user_id'] = ($this->database_model->get_user($this->input->post('email')))[0]->id;
-			$_SESSION['email'] = $this->input->post('email');
-			$_SESSION['eesnimi'] = $this->input->post('eesnimi');
-			$_SESSION['perenimi'] = $this->input->post('perenimi');
-			$_SESSION['liik'] = 'GOOGLE';
-			$returnData->loginStatus = "success";
-			$returnData->redirect = "profiil";
+		} else {
+			// Invalid token
+			$returnData->loginStatus = 'fail';
+			$returnData->alertType = 'danger';
+			$returnData->alertMessage = 'Kehtetud token';
 		}
 		
 		echo json_encode($returnData);
@@ -285,7 +301,7 @@ class Input extends CI_Controller {
 		else {
 			$this->session->set_flashdata('alertType', $returnData->alertType);
 			$this->session->set_flashdata('alertMessage', $returnData->alertMessage);
-			redirect('broneeri');
+			redirect('broneerimine');
 		}
 	}
 	

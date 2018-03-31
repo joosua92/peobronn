@@ -97,12 +97,10 @@ function showAlert(type, message) {
 }
 
 function onSignIn(googleUser) {
-	var profile = googleUser.getBasicProfile();
-	var userData = {
-		email: profile.getEmail(),
-		eesnimi: profile.getGivenName(),
-		perenimi: profile.getFamilyName()
-	}
+	var idToken = googleUser.getAuthResponse().id_token;
+	//var targetUrl = "https://" + window.location.host + "/input/google_login";
+	var targetUrl = "input/google_login";
+	var sendData = "idToken=" + idToken;
 	var fun = function(data) {
 		var returnData = JSON.parse(data);
 		if (returnData.loginStatus == "success") {
@@ -116,14 +114,12 @@ function onSignIn(googleUser) {
 			googleSignOut();
 		}
 	}
-	$.post("input/google_login", userData, fun);
+	$.post(targetUrl, sendData, fun);
 }
 
 function googleSignOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
+    auth2.signOut();
 	auth2.disconnect();
 }
 
