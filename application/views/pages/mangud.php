@@ -78,6 +78,29 @@
 				<h4 class="text-center">Fruit Ninja VR</h4>
 				<p>Sama hea vana Fruit Ninja ainult, et VR-s!</p>
 			</div>
+			<div class="clearfix visible-lg visible-md visible-xs"></div>
+			<div class="col-lg-3 col-md-4 col-xs-6">
+				<img class="img-fluid img-thumbnail" src="<?php echo base_url(); ?>assets/images/mangupildid/farlands.png" alt="Farlands">
+				<h4 class="text-center">Farlands</h4>
+				<p>Mine uurimismissioonile väikese tulnukate planeedile.</p>
+			</div>
+			<div class="col-lg-3 col-md-4 col-xs-6">
+				<img class="img-fluid img-thumbnail" src="<?php echo base_url(); ?>assets/images/mangupildid/funhouse.jpg" alt="Nvidia Funhouse">
+				<h4 class="text-center">Nvidia Funhouse</h4>
+				<p>Virtuaalne karnevali/lõbustuspargi külastus koos erinevate mängudega.</p>
+			</div>
+			<div class="clearfix visible-xs"></div>
+			<div class="col-lg-3 col-md-4 col-xs-6">
+				<img class="img-fluid img-thumbnail" src="<?php echo base_url(); ?>assets/images/mangupildid/tilt.png" alt="Tilt Brush">
+				<h4 class="text-center">Tilt Brush</h4>
+				<p>Avasta oma kunstianne uuesti virtuaalmaailmas. Võimalus väljendada oma mõtteid mitmel viisil.</p>
+			</div>
+			<div class="clearfix visible-md"></div>
+			<div class="col-lg-3 col-md-4 col-xs-6">
+				<img class="img-fluid img-thumbnail" src="<?php echo base_url(); ?>assets/images/mangupildid/rawdata.jpg" alt="Raw Data">
+				<h4 class="text-center">Raw Data</h4>
+				<p>Võitle tulevikus maailma omava korporatsiooni vastu. Pane end proovile robotite vastu.</p>
+			</div>
 			<!-- MIDA ROHKEM MÄNGE SEDA PAREM. VÕIKS OLLA PIISAVALT PALJU, ET SAAKS "LAADI JUURDE" NUPU PANNA -->
 		</div>
     </div>
