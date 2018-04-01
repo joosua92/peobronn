@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2018 at 08:10 PM
+-- Generation Time: Apr 01, 2018 at 10:50 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -78,15 +78,6 @@ CREATE TABLE `kasutaja` (
   `liik` enum('TAVALINE','GOOGLE','SMART-ID') NOT NULL,
   `salasõna` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `kasutaja`
---
-
-INSERT INTO `kasutaja` (`id`, `email`, `eesnimi`, `perenimi`, `liik`, `salasõna`) VALUES
-(9, 'ergo@ergo.ee', 'ergo', 'ergo', 'TAVALINE', '$2y$10$ahRzr18RyJqymd1lzsPX9eBuvke7m4xmPIf7PlML3uWTetEZ1I7nS'),
-(11, 'ergo.nigola@gmail.com', 'Ergo', 'Nigola', 'GOOGLE', ''),
-(12, 'nigola@nigola.ee', 'ergo', 'ergo', 'TAVALINE', '$2y$10$1mYS2cBvMILi8vEqdkqF7eTF5TkuO1p0fC2yYX0iDi6vOzJrTmtGe');
 
 -- --------------------------------------------------------
 
@@ -169,15 +160,6 @@ CREATE TABLE `visit` (
   `browser_version` varchar(64) NOT NULL,
   `country` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `visit`
---
-
-INSERT INTO `visit` (`id`, `time`, `ip`, `browser_name`, `browser_version`, `country`) VALUES
-(1, '2018-03-31 21:13:52', '::1', 'Firefox', '0', 'Sweden'),
-(2, '2018-04-01 13:13:56', '::1', 'Chrome', '0', 'Sweden'),
-(3, '2018-04-01 02:14:16', '::1', 'Firefox', '0', 'Estonia');
 
 -- --------------------------------------------------------
 
