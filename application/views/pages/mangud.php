@@ -44,23 +44,24 @@
 				<h4 class="text-center">Resident Evil VII</h4>
 				<p>Resident Evil on tagasi ja hirmsaim kui enne.</p>
 			</div>
+			<div class="clearfix visible-md visible-xs"></div>
 			<div class="col-lg-3 col-md-4 col-xs-6">
 				<img class="img-fluid img-thumbnail" src="<?php echo base_url(); ?>assets/images/mangupildid/recroom.jpg" alt="Rec Room">
 				<h4 class="text-center">Rec Room</h4>
 				<p>Võimalus suhelda virtuaalmaailmas teiste inimestega. Mängida nendega tennist, paintballi ja muid mänge!</p>
 			</div>
-			<div class="clearfix visible-md"></div>
 			<div class="col-lg-3 col-md-4 col-xs-6">
 				<img class="img-fluid img-thumbnail" src="<?php echo base_url(); ?>assets/images/mangupildid/icelakes.png" alt="Ice Lakes">
 				<h4 class="text-center">Ice Lakes</h4>
 				<p>Moodne kalapüügisimulaator, kus saab õppida tundma kalade käitumist seoses aastaaegade ja ilmaga.</p>
 			</div>
-			<div class="clearfix visible-lg visible-md visible-xs"></div>
+			<div class="clearfix visible-lg visible-xs"></div>
 			<div class="col-lg-3 col-md-4 col-xs-6">
 				<img class="img-fluid img-thumbnail" src="<?php echo base_url(); ?>assets/images/mangupildid/arizonasun.jpg" alt="Arizona Sunshine">
 				<h4 class="text-center">Arizona Sunshine</h4>
 				<p>Zombie Apocalypse VR-s. Jookse ise reaalselt ringi apokalüptilises maailmas ja jää ellu.</p>
 			</div>
+			<div class="clearfix visible-md"></div>
 			<div class="col-lg-3 col-md-4 col-xs-6">
 				<img class="img-fluid img-thumbnail" src="<?php echo base_url(); ?>assets/images/mangupildid/hoverjunk.png" alt="Hover Junkers">
 				<h4 class="text-center">Hover Junkers</h4>
@@ -72,7 +73,6 @@
 				<h4 class="text-center">Dirt Rally</h4>
 				<p>Vana hea Dirt Rally.</p>
 			</div>
-			<div class="clearfix visible-md"></div>
 			<div class="col-lg-3 col-md-4 col-xs-6">
 				<img class="img-fluid img-thumbnail" src="<?php echo base_url(); ?>assets/images/mangupildid/fruitn.jpg" alt="Fruit Ninja VR">
 				<h4 class="text-center">Fruit Ninja VR</h4>
@@ -101,7 +101,7 @@
 				<h4 class="text-center">Raw Data</h4>
 				<p>Võitle tulevikus maailma omava korporatsiooni vastu. Pane end proovile robotite vastu.</p>
 			</div>
-			<!-- MIDA ROHKEM MÄNGE SEDA PAREM. VÕIKS OLLA PIISAVALT PALJU, ET SAAKS "LAADI JUURDE" NUPU PANNA -->
+			<div class="clearfix visible-lg visible-xs"></div>
 		</div>
     </div>
 </div>

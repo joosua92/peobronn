@@ -1,14 +1,41 @@
 <?php
 class Pages extends CI_Controller {
 	
+	public function __construct() {
+		parent::__construct();
+		if (!isset($_SESSION['session_active'])) {
+			$_SESSION['session_active'] = true;
+			$this->log_visit();
+		}
+	}
+	
 	private function loadPage($page, $data) {
 		if (!file_exists(APPPATH.'views/pages/' . $page . '.php')) {
 			show_404();
 		}
-		
 		$this->load->view('templates/header', $data);
         $this->load->view('pages/'.$page, $data);
-        $this->load->view('templates/footer', $data);
+		$this->load->view('templates/footer', $data);
+	}
+	
+	private function log_visit() {
+		$this->load->model('database_model');
+		$visitData = array();
+		$visitData['ip'] = $_SERVER['REMOTE_ADDR'];
+		$browser = get_browser();
+		$visitData['browser_name'] = $browser->browser;
+		$visitData['browser_version'] = $browser->version;
+		// Get ip data
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, 'https://api.ipdata.co/185.20.100.194' . $_SERVER['REMOTE_ADDR']);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_HEADER, FALSE);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/json"));
+		$ipDataJSON = curl_exec($ch);
+		curl_close($ch);
+		$ipData = json_decode($ipDataJSON);
+		$visitData['country'] = $ipData['country_name'];
+		$this->database_model->insert_visit($visitData);
 	}
 	
 	public function avaleht() {

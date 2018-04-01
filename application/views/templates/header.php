@@ -35,13 +35,16 @@
 						<div class="pull-right">
 							<ul class="list-inline" id="konto-lingid">
 								<?php if (!isset($_SESSION['email'])) {
-									echo '<li><a href="' . base_url() . 'sisene">SISENE</a></li>';
-									echo '<li><a href="' . base_url() . 'registreeru">REGISTREERU</a></li>';
+									echo '<li><form action="sisene" method="get"><input class="btn-link" type="submit" value="SISENE"></form></li>';
+									echo '<li><form action="registreeru" method="get"><input class="btn-link" type="submit" value="REGISTREERU"></form></li>';
+									//echo '<li><a href="' . base_url() . 'sisene">SISENE</a></li>';
+									//echo '<li><a href="' . base_url() . 'registreeru">REGISTREERU</a></li>';
 								}
 								else {
-									echo '<li><a href="' . base_url() . 'profiil">PROFIIL</a></li>';
-									echo '<li><a href="#" id="logout-link">VÄLJU</a></li>';
-									//echo '<li><form action="input/logout" method="post"><input class="btn-link" type="submit" value="VÄLJU"></form></li>';
+									echo '<li><form action="profiil" method="get"><input class="btn-link" type="submit" value="PROFIIL"></form></li>';
+									echo '<li><form action="input/logout" method="post"><input class="btn-link" type="submit" value="VÄLJU"></form></li>';
+									//echo '<li><a href="' . base_url() . 'profiil" class="btn-link">PROFIIL</a></li>';
+									//echo '<li><a href="#" id="logout-link">VÄLJU</a></li>';
 								}
 								?>
 							</ul>

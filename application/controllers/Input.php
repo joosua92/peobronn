@@ -152,6 +152,7 @@ class Input extends CI_Controller {
 			$returnData->redirect = 'valjund';
 		}
 		session_unset();
+		$_SESSION['session_active'] = true;
 		if ($ajax) {
 			echo json_encode($returnData);
 		}
@@ -219,6 +220,9 @@ class Input extends CI_Controller {
 				$_SESSION['liik'] = 'GOOGLE';
 				$returnData->loginStatus = "success";
 				$returnData->redirect = "profiil";
+				
+				$this->load->model("email_model");
+				$this->email_model->send_registration_email($userEmail);
 			}
 		} else {
 			// Invalid token
@@ -311,5 +315,48 @@ class Input extends CI_Controller {
 		$this->session->set_flashdata('alertType', 'success');
 		$this->session->set_flashdata('alertMessage', 'Broneering tühistatud.');
 		redirect('profiil');
+	}
+	
+	public function get_visitor_stats() {
+		$this->load->model("database_model");
+		// Visit time
+		$visits = $this->database_model->get_visits();
+		$visit_times = array();
+		foreach ($visits as $visit) {
+			$timestamp = strtotime($visit->time);
+			$hour = (int)date('H', $timestamp);
+			$time_range = null;
+			if ($hour < 6) {
+				$time_range = "00 - 06";
+			} else if ($hour < 12) {
+				$time_range = "06 - 12";
+			} else if ($hour < 18) {
+				$time_range = "12 - 18";
+			} else {
+				$time_range = "18 - 00";
+			}
+			if (array_key_exists($time_range, $visit_times)) {
+				$visit_times[$time_range]++;
+			} else {
+				$visit_times[$time_range] = 1;
+			}
+		}
+		// Browser
+		$browsers = array();
+		$visit_browsers = $this->database_model->get_visit_browsers();
+		foreach ($visit_browsers as $visit_browser) {
+			$browsers[$visit_browser->browser_name] = (int)$visit_browser->count;
+		}
+		// Country
+		$countries = array();
+		$visit_countries = $this->database_model->get_visit_countries();
+		foreach ($visit_countries as $visit_country) {
+			$countries[$visit_country->country] = (int)$visit_country->count;
+		}
+		$returnData = new stdClass();
+		$returnData->browsers = $browsers;
+		$returnData->countries = $countries;
+		$returnData->visit_times = $visit_times;
+		echo json_encode($returnData);
 	}
 }

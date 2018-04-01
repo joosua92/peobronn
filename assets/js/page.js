@@ -106,7 +106,7 @@ function onSignIn(googleUser) {
 		if (returnData.loginStatus == "success") {
 			window.location.href = returnData.redirect;
 		}
-		else if (returnData.loginStatus = "already in") {
+		else if (returnData.loginStatus == "already in") {
 			window.location.href = returnData.redirect;
 		}
 		else {
