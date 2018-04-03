@@ -1,2 +1,2 @@
 # peobronn
-Peobroneerimise veebirakendus.
+Rakendus virtuaalreaalsuse ürituste broneerimiseks.

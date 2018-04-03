@@ -4,8 +4,6 @@ footer {
 	padding: 40px;
 }
 
-
-
 .footer-link:link,
 .footer-link:visited {
 	color: DarkGray;
@@ -115,4 +113,8 @@ h3 {
 #konto-lingid li form input {
 	color: White;
 	font-size: 80%;
+}
+
+.game-title {
+	font-size: 140%;
 }

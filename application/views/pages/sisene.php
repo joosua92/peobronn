@@ -12,8 +12,6 @@
 				echo '<div class="alert collapse" role="alert" id="alert-box"></div>';
 			}
 			?>
-			<div class="alert collapse" role="alert" id="alert-box">
-			</div>
 			<div class="col-md-6">
 				<form action="input/login" method="post" id="login-form">
 					<div class="form-group">
@@ -29,7 +27,7 @@
 			</div>
 			<div class="col-md-6">
 				<div id="google-login-container">
-					<div><b>Sisene läbi Google<b></div>
+					<div><strong>Sisene läbi Google</strong></div>
 					<div class="g-signin2" data-onsuccess="onSignIn"></div>
 				</div>
 			</div>

@@ -22,20 +22,44 @@ class Pages extends CI_Controller {
 		$this->load->model('database_model');
 		$visitData = array();
 		$visitData['ip'] = $_SERVER['REMOTE_ADDR'];
-		$browser = get_browser();
-		$visitData['browser_name'] = $browser->browser;
-		$visitData['browser_version'] = $browser->version;
-		// Get ip data
+		$browser = $this->getBrowser();
+		$visitData['browser_name'] = $browser['browser_name'];
+		$visitData['browser_version'] = $browser['browser_version'];
+		// Get ip data through online API
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'https://api.ipdata.co/185.20.100.194' . $_SERVER['REMOTE_ADDR']);
+		curl_setopt($ch, CURLOPT_URL, 'https://api.ipdata.co/' . $_SERVER['REMOTE_ADDR']);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, FALSE);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/json"));
 		$ipDataJSON = curl_exec($ch);
 		curl_close($ch);
 		$ipData = json_decode($ipDataJSON);
-		$visitData['country'] = $ipData['country_name'];
+		$visitData['country'] = $ipData->country_name;
 		$this->database_model->insert_visit($visitData);
+	}
+	
+	private function getBrowser() {
+		// Uses online API to get browser data from HTTP_USER_AGENT
+		if (isset($_SERVER['HTTP_USER_AGENT'])) {
+			$userAgent = $_SERVER['HTTP_USER_AGENT'];
+			$ch = curl_init();
+			$url = 'http://www.useragentstring.com/?uas=' . urlencode($userAgent) . '&getText=all'; 
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+			curl_setopt($ch, CURLOPT_HEADER, FALSE);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/json"));
+			$response = curl_exec($ch);
+			curl_close($ch);
+			$response = str_replace(";", "&", $response);
+			parse_str($response, $agentData);
+			$returnData = array(
+				'browser_name' => $agentData['agent_name'],
+				'browser_version' => $agentData['agent_version']
+			);
+			return $returnData;
+		} else {
+			return array('browser_name' => 'unknown', 'browser_version' => 'unknown');
+		}
 	}
 	
 	public function avaleht() {
