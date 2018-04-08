@@ -124,7 +124,11 @@ class Input extends CI_Controller {
 					$_SESSION['eesnimi'] = $account->eesnimi;
 					$_SESSION['perenimi'] = $account->perenimi;
 					$_SESSION['liik'] = $account->liik;
-					$returnData->redirect = "profiil";
+					if (isset($_SESSION['redirect'])) {
+						$returnData->redirect = $_SESSION['redirect'];
+					} else {
+						$returnData->redirect = "profiil";
+					}
 				}
 			}
 		}
@@ -136,7 +140,11 @@ class Input extends CI_Controller {
 				$this->session->set_flashdata('alertType', $returnData->alertType);
 				$this->session->set_flashdata('alertMessage', $returnData->alertMessage);
 			}
-			redirect('profiil');
+			if (property_exists($returnData->redirect)) {
+				redirect($returnData->redirect);
+			} else {
+				redirect('profiil');
+			}
 		}
 	}
 	

@@ -101,6 +101,7 @@ class Pages extends CI_Controller {
 		if (!isset($_SESSION['email'])) {
 			$this->session->set_flashdata('alertType', 'info');
 			$this->session->set_flashdata('alertMessage', 'Broneerimiseks on vaja sisse logida.');
+			$this->session->set_flashdata('redirect', 'broneerimine');
 			redirect('sisene');
 		}
 		else {
@@ -116,6 +117,9 @@ class Pages extends CI_Controller {
 		else {
 			$data['title'] = "Sisene - Mängumaailm";
 			$this->loadPage("sisene", $data);
+		}
+		if (isset($_SESSION['redirect'])) {
+			$this->session->set_flashdata('redirect', $_SESSION['redirect']);
 		}
 	}
 	
