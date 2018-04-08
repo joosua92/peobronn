@@ -77,4 +77,14 @@ class Database_model extends CI_Model {
 		$returnData = $this->db->query($query);
 		return $returnData->result();
 	}
+	
+	public function get_games($limit) {
+		$query = "SELECT * FROM view_game ORDER BY id";
+		if ($limit !== 'ALL') {
+			$limit = $this->db->escape($limit);
+			$query .= " LIMIT $limit";
+		}
+		$returnData = $this->db->query($query);
+		return $returnData->result();
+	}
 }

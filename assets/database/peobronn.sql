@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2018 at 10:50 PM
+-- Generation Time: Apr 08, 2018 at 04:29 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -67,6 +67,41 @@ CREATE TABLE `broneering` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `game`
+--
+
+CREATE TABLE `game` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(1023) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `game`
+--
+
+INSERT INTO `game` (`id`, `title`, `description`, `image`) VALUES
+(1, 'Serious Sam VR: The First Encounter', 'Vanakooli shooter nüüd VR-is. Tunne end Sam-ina ja päästa maailm.', 'serioussam.jpg'),
+(2, 'Space Pirate Trainer', 'Ole kosmosepiraat. Vali relvad, pane end valmis ja võitle end parimate hulka!', 'spacepirate.jpg'),
+(3, 'Superhot', 'First person shooter, kus mäng liigub aind siis edasi kui Sa ise liigud. Vaata kaugele jõuad.', 'supahot.png'),
+(4, 'theBlu', 'Sukeldu ookeani sügavustesse ja saa unustamatu seiklus.', 'theblu.jpg'),
+(5, 'Robo Recall', 'Kehasta agenti, kelle ülesanne on rikki läinud robotid tagasi tuua.', 'roborecall.png'),
+(6, 'Resident Evil VII', 'Resident Evil on tagasi ja hirmsaim kui enne.', 'REVII.jpg'),
+(7, 'Rec Room', 'Võimalus suhelda virtuaalmaailmas teiste inimestega. Mängida nendega tennist, paintballi ja muid mänge!', 'recroom.jpg'),
+(8, 'Ice Lakes', 'Moodne kalapüügisimulaator, kus saab õppida tundma kalade käitumist seoses aastaaegade ja ilmaga.', 'icelakes.png'),
+(9, 'Arizona Sunshine', 'Zombie Apocalypse VR-s. Jookse ise reaalselt ringi apokalüptilises maailmas ja jää ellu.', 'arizonasun.jpg'),
+(10, 'Hover Junkers', 'Ehita endale oma hõljukloss. Põikle vastaste kuulide eest ja võitle ellujäämise nimel.', 'hoverjunk.png'),
+(11, 'Dirt Rally', 'Dirt Rally', 'dirt.jpg'),
+(12, 'Fruit Ninja VR', 'Sama hea vana Fruit Ninja ainult, et VR-s!', 'fruitn.jpg'),
+(13, 'Farlands', 'Mine uurimismissioonile väikese tulnukate planeedile.', 'farlands.png'),
+(14, 'Nvidia Funhouse', 'Virtuaalne karnevali/lõbustuspargi külastus koos erinevate mängudega.', 'funhouse.jpg'),
+(15, 'Tilt Brush', 'Avasta oma kunstianne uuesti virtuaalmaailmas. Võimalus väljendada oma mõtteid mitmel viisil.', 'tilt.png'),
+(16, 'Raw Data', 'Võitle tulevikus maailma omava korporatsiooni vastu. Pane end proovile robotite vastu.', 'rawdata.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kasutaja`
 --
 
@@ -92,6 +127,19 @@ CREATE TABLE `view_broneering` (
 ,`kellaaeg` enum('10:00 - 11:00','11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00')
 ,`kuupäev` date
 ,`broneerimise_aeg` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_game`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_game` (
+`id` int(11)
+,`title` varchar(255)
+,`description` varchar(1023)
+,`image` varchar(255)
 );
 
 -- --------------------------------------------------------
@@ -161,6 +209,16 @@ CREATE TABLE `visit` (
   `country` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `visit`
+--
+
+INSERT INTO `visit` (`id`, `time`, `ip`, `browser_name`, `browser_version`, `country`) VALUES
+(23, '2018-04-02 15:54:36', '::1', 'Firefox', '59.0', NULL),
+(24, '2018-04-02 15:59:50', '::1', 'Chrome', '65.0.3325.181', 'Estonia'),
+(25, '2018-04-02 16:00:01', '::1', 'Chrome', '65.0.3325.181', 'Estonia'),
+(26, '2018-04-05 09:41:32', '::1', 'Chrome', '65.0.3325.181', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -169,6 +227,15 @@ CREATE TABLE `visit` (
 DROP TABLE IF EXISTS `view_broneering`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_broneering`  AS  select `broneering`.`id` AS `id`,`broneering`.`kasutaja_id` AS `kasutaja_id`,`broneering`.`pakett` AS `pakett`,`broneering`.`kellaaeg` AS `kellaaeg`,`broneering`.`kuupäev` AS `kuupäev`,`broneering`.`broneerimise_aeg` AS `broneerimise_aeg` from `broneering` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_game`
+--
+DROP TABLE IF EXISTS `view_game`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_game`  AS  select `game`.`id` AS `id`,`game`.`title` AS `title`,`game`.`description` AS `description`,`game`.`image` AS `image` from `game` ;
 
 -- --------------------------------------------------------
 
@@ -219,6 +286,12 @@ ALTER TABLE `broneering`
   ADD KEY `kasutaja_id` (`kasutaja_id`);
 
 --
+-- Indexes for table `game`
+--
+ALTER TABLE `game`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `kasutaja`
 --
 ALTER TABLE `kasutaja`
@@ -239,19 +312,25 @@ ALTER TABLE `visit`
 -- AUTO_INCREMENT for table `broneering`
 --
 ALTER TABLE `broneering`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `game`
+--
+ALTER TABLE `game`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `kasutaja`
 --
 ALTER TABLE `kasutaja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables

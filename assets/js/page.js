@@ -46,7 +46,8 @@ $(document).ready(function() {
 	});
 	
 	// Log user out
-	$("#logout-link").submit(function(){
+	$("#logout-form").submit(function(event){
+		event.preventDefault();
 		var fun = function(data) {
 			var returnData = JSON.parse(data);
 			if (returnData.logoutStatus == "google") {

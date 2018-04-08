@@ -42,7 +42,7 @@
 								}
 								else {
 									echo '<li><form action="profiil" method="get"><input class="btn-link" type="submit" value="PROFIIL"></form></li>';
-									echo '<li><form action="input/logout" method="post"><input class="btn-link" type="submit" value="VÄLJU" id="logout-link"></form></li>';
+									echo '<li><form action="input/logout" method="post" id="logout-form"><input class="btn-link" type="submit" value="VÄLJU"></form></li>';
 									//echo '<li><a href="' . base_url() . 'profiil" class="btn-link">PROFIIL</a></li>';
 									//echo '<li><a href="#" id="logout-link">VÄLJU</a></li>';
 								}

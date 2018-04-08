@@ -25,6 +25,10 @@ class Pages extends CI_Controller {
 		$browser = $this->getBrowser();
 		$visitData['browser_name'] = $browser['browser_name'];
 		$visitData['browser_version'] = $browser['browser_version'];
+		// FIX THIS PART
+		if ($visitData['browser_name'] === false) {
+			return;
+		}
 		// Get ip data through online API
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, 'https://api.ipdata.co/' . $_SERVER['REMOTE_ADDR']);
@@ -52,10 +56,19 @@ class Pages extends CI_Controller {
 			curl_close($ch);
 			$response = str_replace(";", "&", $response);
 			parse_str($response, $agentData);
-			$returnData = array(
-				'browser_name' => $agentData['agent_name'],
-				'browser_version' => $agentData['agent_version']
-			);
+			// FIX THIS PART
+			$returnData = array();
+			if (isset($agentData['agent_name'])) {
+				$returnData = array(
+					'browser_name' => $agentData['agent_name'],
+					'browser_version' => $agentData['agent_version']
+				);
+			} else {
+				$returnData = array(
+					'browser_name' => false,
+					'browser_version' => false
+				);
+			}
 			return $returnData;
 		} else {
 			return array('browser_name' => 'unknown', 'browser_version' => 'unknown');
@@ -68,6 +81,8 @@ class Pages extends CI_Controller {
 	}
 	
 	public function mangud() {
+		$this->load->model("database_model");
+		$data['games'] = $this->database_model->get_games(8);	
 		$data['title'] = "Mängud & elamused - Mängumaailm";
 		$this->loadPage("mangud", $data);
 	}

@@ -118,3 +118,7 @@ h3 {
 .game-title {
 	font-size: 140%;
 }
+
+#all-games-button {
+	margin-top: 30px;
+}

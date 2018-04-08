@@ -2,14 +2,15 @@
 class Email_model extends CI_Model {
 	
 	public function send_registration_email($user_email) {
-		$subject = 'Olete edukalt registreeritud - Mängumaailm';
-		$txt = 'Olete edukalt endale Mängumaailm kasutaja teinud. ' . "\r\n" .
-			'Sisenemiseks vajutage kodulehel sisene lingile.' . "\r\n\r\n" . 'Mängumaailm';
-		$headers = 'From: "Mängumaailm" <mangumaailm@online.ee>';
-		if (!mail($user_email,$subject,$txt,$headers)) {
-			throw new Exception('email fail');
+		if (constant('ENVIRONMENT') != 'development') {
+			$subject = 'Olete edukalt registreeritud - Mängumaailm';
+			$txt = 'Olete edukalt endale Mängumaailm kasutaja teinud. ' . "\r\n" .
+				'Sisenemiseks vajutage kodulehel sisene lingile.' . "\r\n\r\n" . 'Mängumaailm';
+			$headers = 'From: "Mängumaailm" <mangumaailm@online.ee>';
+			if (!mail($user_email,$subject,$txt,$headers)) {
+				throw new Exception('email fail');
+			}
 		}
-		
 		/* Old version. Works, but 000webhost doesn't allow SMTP for free users.
 		$this->config->load('email');
 		$config['protocol'] = 'smtp';

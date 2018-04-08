@@ -359,4 +359,11 @@ class Input extends CI_Controller {
 		$returnData->visit_times = $visit_times;
 		echo json_encode($returnData);
 	}
+	
+	public function get_remaining_games() {
+		$this->load->model("database_model");
+		$games = $this->database_model->get_games('ALL');
+		$games = array_slice($games, 8);
+		echo json_encode($games);
+	}
 }
