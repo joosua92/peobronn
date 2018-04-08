@@ -122,3 +122,8 @@ h3 {
 #all-games-button {
 	margin-top: 30px;
 }
+
+.tooltip-image {
+	width: 30px;
+	height: 30px;
+}

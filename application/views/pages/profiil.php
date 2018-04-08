@@ -21,6 +21,9 @@
 						<form action="profile/picture_upload" method="post" enctype="multipart/form-data">
 							<div class="form-group" id="vaheta-pilti-form-group">
 								<label for="kasutaja-fail">Vaheta profiilipilti</label>
+								<a href="#" data-toggle="tooltip" data-placement="right" title="Sobivad formaadid: gif, jpg, png">
+									<img class="tooltip-image" alt="#" src="<?php echo base_url(); ?>assets/images/tooltip_mark.png">
+								</a>
 								<input type="file" class="form-control-file" name="kasutaja-fail" id="kasutaja-fail">
 							</div>
 							<input type="submit" value="Lae pilt üles" id="lae-pilt">

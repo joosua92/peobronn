@@ -38,7 +38,11 @@ class Pages extends CI_Controller {
 		$ipDataJSON = curl_exec($ch);
 		curl_close($ch);
 		$ipData = json_decode($ipDataJSON);
-		$visitData['country'] = $ipData->country_name;
+		if (property_exists('ipData', 'country_name')) {
+			$visitData['country'] = $ipData->country_name;
+		} else {
+			return;
+		}
 		$this->database_model->insert_visit($visitData);
 	}
 	

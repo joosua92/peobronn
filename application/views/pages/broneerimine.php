@@ -16,13 +16,19 @@
 				<form action="input/reserv" method="post" id="reserv-form">
 					<div class="form-group">
 						<label for="kuupäev">Vali kuupäev:</label>
+						<a href="#" data-toggle="tooltip" data-placement="right" title="Kuupäev peab olema formaadis DD/MM/YYYY, näiteks 15/02/2018" id="date-tooltip-nojs">
+							<img class="tooltip-image" alt="#" src="<?php echo base_url(); ?>assets/images/tooltip_mark.png">
+						</a>
+						<a href="#" class="collapse" data-toggle="tooltip" data-placement="right" title="Vali sobiv kuupäev ürituse jaoks" id="date-tooltip-js">
+							<img class="tooltip-image" alt="#" src="<?php echo base_url(); ?>assets/images/tooltip_mark.png">
+						</a>
 						<div id="datepicker"></div>
 						<input type="text" class="form-control" id="kuupäev" name="kuupäev">
 					</div>
 					<div class="form-group">
 						<label for="kellaaeg">Vali kellaaeg:</label>
 						<select class="form-control" id="kellaaeg" name="kellaaeg">
-							<option selected="selected" disabled="disabled" hidden="hidden">-</option>
+							<option selected="selected" disabled="disabled" hidden="hidden">Vali kellaaeg</option>
 							<option>10:00 - 11:00</option>
 							<option>11:00 - 12:00</option>
 							<option>12:00 - 13:00</option>
@@ -37,7 +43,7 @@
 					<div class="form-group">
 						<label for="pakett">Vali pakett:</label>
 						<select class="form-control" id="pakett" name="pakett">
-							<option selected="selected" disabled="disabled" hidden="hidden">-</option>
+							<option selected="selected" disabled="disabled" hidden="hidden">Vali pakett</option>
 							<option>Pakett 1</option>
 							<option>Pakett 2</option>
 						</select>

@@ -13,6 +13,7 @@ $(document).ready(function() {
 			navItems[i].setAttribute("class", "active");
 		}
 	}
+	$('[data-toggle="tooltip"]').tooltip();
 });
 
 $(document).ready(function() {
@@ -83,6 +84,9 @@ $(document).ready(function() {
 	});
 	// Disable typing input
 	$('#kuupäev').attr('readonly', true);
+	// Change tooltip
+	$("#date-tooltip-nojs").hide();
+	$("#date-tooltip-js").show();
 });
 
 function showAlert(type, message) {

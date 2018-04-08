@@ -16,10 +16,16 @@
 				<form action="input/login" method="post" id="login-form">
 					<div class="form-group">
 						<label for="email">E-mail:</label>
+						<a href="#" data-toggle="tooltip" data-placement="right" title="Sisesta e-mail millega registreerusid">
+							<img class="tooltip-image" alt="#" src="<?php echo base_url(); ?>assets/images/tooltip_mark.png">
+						</a>
 						<input type="text" class="form-control" id="email" placeholder="Sisesta e-mail" name="email">
 					</div>
 					<div class="form-group">
 						<label for="salasõna">Salasõna:</label>
+						<a href="#" data-toggle="tooltip" data-placement="right" title="Sisesta oma salasõna">
+							<img class="tooltip-image" alt="#" src="<?php echo base_url(); ?>assets/images/tooltip_mark.png">
+						</a>
 						<input type="password" class="form-control" id="salasõna" placeholder="Sisesta salasõna" name="salasõna">
 					</div>
 					<input type="submit" value="Sisene">

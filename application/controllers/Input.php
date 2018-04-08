@@ -136,11 +136,11 @@ class Input extends CI_Controller {
 			echo json_encode($returnData);
 		}
 		else {
-			if (property_exists($returnData->alertType) && property_exists($returnData->alertMessage)) {
+			if (property_exists('returnData', 'alertType') && property_exists('returnData', 'alertMessage')) {
 				$this->session->set_flashdata('alertType', $returnData->alertType);
 				$this->session->set_flashdata('alertMessage', $returnData->alertMessage);
 			}
-			if (property_exists($returnData->redirect)) {
+			if (property_exists('returnData', 'redirect')) {
 				redirect($returnData->redirect);
 			} else {
 				redirect('profiil');

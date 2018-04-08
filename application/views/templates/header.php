@@ -9,11 +9,11 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/extra_style.css">
 		<script src="<?php echo base_url(); ?>assets/js/jquery-3.3.1.min.js"></script>
-		<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/page.js"></script>
 		<script src="https://apis.google.com/js/platform.js?onload=onGoogleLoad" async defer></script>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery-ui.css">
 		<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<div class="wrapper">
