@@ -1,0 +1,1 @@
+(typeof $().modal == 'function') || document.write('<script src="' + window.location.origin + '/assets/js/bootstrap.min.js">\x3C/script>');

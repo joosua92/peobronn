@@ -1,0 +1,1 @@
+jQuery.ui || document.write('<script src="' + window.location.origin + '/assets/js/jquery-ui.js">\x3C/script>');
