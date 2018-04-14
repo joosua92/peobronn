@@ -1,3 +1,9 @@
+		<div id="notification-bar" class="collapse">
+			<div class="container">
+				<p id="notification-text"></p>
+				<span id="notification-close"><button type="button" class="btn btn-link">X</button></span>
+			</div>
+		</div>
 		</div>
 		<div id="footer-clear"></div>
 		<footer class="footer text-center">

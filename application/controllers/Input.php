@@ -159,8 +159,11 @@ class Input extends CI_Controller {
 			$returnData->logoutStatus = 'normal';
 			$returnData->redirect = 'valjund';
 		}
-		session_unset();
-		$_SESSION['session_active'] = true;
+		unset($_SESSION['user_id']);
+		unset($_SESSION['email']);
+		unset($_SESSION['eesnimi']);
+		unset($_SESSION['perenimi']);
+		unset($_SESSION['liik']);
 		if ($ajax) {
 			echo json_encode($returnData);
 		}
@@ -320,6 +323,11 @@ class Input extends CI_Controller {
 	public function cancel_reservation($reservation_id) {
 		$this->load->model('database_model');
 		$this->database_model->remove_reservation($reservation_id);
+		foreach ($_SESSION['existing_reservations'] as $key => $userReservation) {
+			if ($userReservation->id == $reservation_id) {
+				unset($_SESSION['existing_reservations'][$key]);
+			}
+		}
 		$this->session->set_flashdata('alertType', 'success');
 		$this->session->set_flashdata('alertMessage', 'Broneering tühistatud.');
 		redirect('profiil');

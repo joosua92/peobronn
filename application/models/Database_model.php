@@ -45,6 +45,12 @@ class Database_model extends CI_Model {
 		return $returnData->result();
 	}
 	
+	public function get_all_reservations() {
+		$query = "SELECT * FROM view_broneering;";
+		$returnData = $this->db->query($query);
+		return $returnData->result();
+	}
+	
 	public function remove_reservation($reservation_id) {
 		$reservation_id = $this->db->escape($reservation_id);
 		$deleteQuery = "CALL kustuta_broneering($reservation_id );";

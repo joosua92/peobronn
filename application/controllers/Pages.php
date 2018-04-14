@@ -6,6 +6,9 @@ class Pages extends CI_Controller {
 		if (!isset($_SESSION['session_active'])) {
 			$_SESSION['session_active'] = true;
 			$this->log_visit();
+			// Put all reservations into session
+			$this->load->model('database_model');
+			$_SESSION['existing_reservations'] = $this->database_model->get_all_reservations();
 		}
 	}
 	

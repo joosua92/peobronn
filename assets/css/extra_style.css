@@ -16,6 +16,24 @@ footer {
 	font-weight: normal;
 }
 
+#notification-bar {
+	background: #00ff99;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+}
+
+#notification-text {
+	margin-top: 5px;
+}
+
+#notification-close {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+}
+
 html, body {
 	height: 100%;
 }
