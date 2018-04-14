@@ -2,6 +2,12 @@
 	<div class="page-header">
 		<h1>Külastajat statistika</h1>
 	</div>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Mängumaailm</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Külastajate statistika</li>
+		</ol>
+	</nav>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">

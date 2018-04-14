@@ -174,4 +174,9 @@ class Pages extends CI_Controller {
 		$data['title'] = "Külastajate statistika - Mängumaailm";
 		$this->loadPage("statistika", $data);
 	}
+	
+	public function kontakt() {
+		$data['title']= 'Kontakt - Mängumaailm';
+		$this->loadPage("kontakt", $data);
+	}
 }

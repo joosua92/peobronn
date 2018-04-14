@@ -7,7 +7,7 @@
 		</div>
 		<div id="footer-clear"></div>
 		<footer class="footer text-center">
-			<p>Kontakt: <a href="mailto:mangumaailm@online.ee" class="footer-link">mangumaailm@online.ee</a> |
+			<p><a href="<?php echo base_url() . 'kontakt'; ?>" class="footer-link">Kontakt</a> |
 			<a href="<?php echo base_url() . 'statistika'; ?>" class="footer-link">Külastajate statistika</a></p>
 		</footer>
     </body>
