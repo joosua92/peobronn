@@ -37,10 +37,19 @@ function poll() {
 function showRemoved(reservations) {
 	var count = reservations.length;
 	var outputText = "";
+	var lang = document.getElementsByTagName('html')[0].getAttribute('lang');
 	if (count == 1) {
-		outputText += "1 uus aeg on vaba: ";
+		if (lang == "en") {
+			outputText += "1 new available time: ";
+		} else {
+			outputText += "1 uus aeg on vaba: ";
+		}
 	} else {
-		outputText += count + " uut aega on vabad: ";
+		if (lang == "en") {
+			outputText += count + " new available times: ";
+		} else {
+			outputText += count + " uut aega on vabad: ";
+		}
 	}
 	for (var i = 0; i < reservations.length; i++) {
 		if (i != 0) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2018 at 04:29 PM
+-- Generation Time: Apr 15, 2018 at 08:53 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -36,7 +36,7 @@ BEGIN
 	DELETE FROM broneering WHERE id=in_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sisesta_broneering` (IN `in_email` VARCHAR(255), IN `in_pakett` ENUM('Pakett 1','Pakett 2'), IN `in_kellaaeg` ENUM('10:00 - 11:00','11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00'), IN `in_kuupäev` DATE)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sisesta_broneering` (IN `in_email` VARCHAR(255), IN `in_pakett` ENUM('1','2'), IN `in_kellaaeg` ENUM('10:00 - 11:00','11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00'), IN `in_kuupäev` DATE)  NO SQL
 BEGIN
 	DECLARE v_kasutaja_id INT(11);
     SELECT id INTO v_kasutaja_id FROM kasutaja WHERE email=in_email;
@@ -58,7 +58,7 @@ DELIMITER ;
 CREATE TABLE `broneering` (
   `id` int(11) NOT NULL,
   `kasutaja_id` int(11) NOT NULL,
-  `pakett` enum('Pakett 1','Pakett 2') NOT NULL,
+  `pakett` enum('1','2') NOT NULL,
   `kellaaeg` enum('10:00 - 11:00','11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00') NOT NULL,
   `kuupäev` date NOT NULL,
   `broneerimise_aeg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -73,7 +73,8 @@ CREATE TABLE `broneering` (
 CREATE TABLE `game` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `description` varchar(1023) NOT NULL,
+  `estonian_description` varchar(1023) NOT NULL,
+  `english_description` varchar(1023) NOT NULL,
   `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -81,23 +82,23 @@ CREATE TABLE `game` (
 -- Dumping data for table `game`
 --
 
-INSERT INTO `game` (`id`, `title`, `description`, `image`) VALUES
-(1, 'Serious Sam VR: The First Encounter', 'Vanakooli shooter nüüd VR-is. Tunne end Sam-ina ja päästa maailm.', 'serioussam.jpg'),
-(2, 'Space Pirate Trainer', 'Ole kosmosepiraat. Vali relvad, pane end valmis ja võitle end parimate hulka!', 'spacepirate.jpg'),
-(3, 'Superhot', 'First person shooter, kus mäng liigub aind siis edasi kui Sa ise liigud. Vaata kaugele jõuad.', 'supahot.png'),
-(4, 'theBlu', 'Sukeldu ookeani sügavustesse ja saa unustamatu seiklus.', 'theblu.jpg'),
-(5, 'Robo Recall', 'Kehasta agenti, kelle ülesanne on rikki läinud robotid tagasi tuua.', 'roborecall.png'),
-(6, 'Resident Evil VII', 'Resident Evil on tagasi ja hirmsaim kui enne.', 'REVII.jpg'),
-(7, 'Rec Room', 'Võimalus suhelda virtuaalmaailmas teiste inimestega. Mängida nendega tennist, paintballi ja muid mänge!', 'recroom.jpg'),
-(8, 'Ice Lakes', 'Moodne kalapüügisimulaator, kus saab õppida tundma kalade käitumist seoses aastaaegade ja ilmaga.', 'icelakes.png'),
-(9, 'Arizona Sunshine', 'Zombie Apocalypse VR-s. Jookse ise reaalselt ringi apokalüptilises maailmas ja jää ellu.', 'arizonasun.jpg'),
-(10, 'Hover Junkers', 'Ehita endale oma hõljukloss. Põikle vastaste kuulide eest ja võitle ellujäämise nimel.', 'hoverjunk.png'),
-(11, 'Dirt Rally', 'Dirt Rally', 'dirt.jpg'),
-(12, 'Fruit Ninja VR', 'Sama hea vana Fruit Ninja ainult, et VR-s!', 'fruitn.jpg'),
-(13, 'Farlands', 'Mine uurimismissioonile väikese tulnukate planeedile.', 'farlands.png'),
-(14, 'Nvidia Funhouse', 'Virtuaalne karnevali/lõbustuspargi külastus koos erinevate mängudega.', 'funhouse.jpg'),
-(15, 'Tilt Brush', 'Avasta oma kunstianne uuesti virtuaalmaailmas. Võimalus väljendada oma mõtteid mitmel viisil.', 'tilt.png'),
-(16, 'Raw Data', 'Võitle tulevikus maailma omava korporatsiooni vastu. Pane end proovile robotite vastu.', 'rawdata.jpg');
+INSERT INTO `game` (`id`, `title`, `estonian_description`, `english_description`, `image`) VALUES
+(1, 'Serious Sam VR: The First Encounter', 'Vanakooli shooter nüüd VR-is. Tunne end Sam-ina ja päästa maailm.', 'Oldschool shooter in VR. Feel like Sam and save the world.', 'serioussam.jpg'),
+(2, 'Space Pirate Trainer', 'Ole kosmosepiraat. Vali relvad, pane end valmis ja võitle end parimate hulka!', 'Be a space pirate. Choose your weapon, get ready and fight yourself to the top!', 'spacepirate.jpg'),
+(3, 'Superhot', 'First person shooter, kus mäng liigub aind siis edasi kui Sa ise liigud. Vaata kaugele jõuad.', 'First person shooter, where time moves only when you move.', 'supahot.png'),
+(4, 'theBlu', 'Sukeldu ookeani sügavustesse ja saa unustamatu seiklus.', 'Dive into the depths of the ocean and get an unforgettable experience.', 'theblu.jpg'),
+(5, 'Robo Recall', 'Kehasta agenti, kelle ülesanne on rikki läinud robotid tagasi tuua.', 'Turn into an agent, whose task is to retrieve malfunctioning robots.', 'roborecall.png'),
+(6, 'Resident Evil VII', 'Resident Evil on tagasi ja hirmsaim kui enne.', 'Resident Evil is back and scarier than ever.', 'REVII.jpg'),
+(7, 'Rec Room', 'Võimalus suhelda virtuaalmaailmas teiste inimestega. Mängida nendega tennist, paintballi ja muid mänge!', 'An opportunity to interact with other people in virtual world. You can play games like tennis, paintball and many more.', 'recroom.jpg'),
+(8, 'Ice Lakes', 'Moodne kalapüügisimulaator, kus saab õppida tundma kalade käitumist seoses aastaaegade ja ilmaga.', 'Modern fishing simulator, where you can learn about the behaviour of the fish regarding the season and weather.', 'icelakes.png'),
+(9, 'Arizona Sunshine', 'Zombie Apocalypse VR-s. Jookse ise reaalselt ringi apokalüptilises maailmas ja jää ellu.', 'Zombie Apocalypse in VR. Run around in an apocalyptic world and survive.', 'arizonasun.jpg'),
+(10, 'Hover Junkers', 'Ehita endale oma hõljukloss. Põikle vastaste kuulide eest ja võitle ellujäämise nimel.', 'Build your own hover tower. Dodge enemies bullets and fight for survival.', 'hoverjunk.png'),
+(11, 'Dirt Rally', 'Vana hea Dirt Rally.', 'Good old Dirt Rally.', 'dirt.jpg'),
+(12, 'Fruit Ninja VR', 'Sama hea vana Fruit Ninja ainult, et VR-s!', 'The same good old Fruit Ninja, only in VR!', 'fruitn.jpg'),
+(13, 'Farlands', 'Mine uurimismissioonile väikese tulnukate planeedile.', 'Go on an expedition on an alien planet.', 'farlands.png'),
+(14, 'Nvidia Funhouse', 'Virtuaalne karnevali/lõbustuspargi külastus koos erinevate mängudega.', 'Virtual carnival visit with many entertaining games.', 'funhouse.jpg'),
+(15, 'Tilt Brush', 'Avasta oma kunstianne uuesti virtuaalmaailmas. Võimalus väljendada oma mõtteid mitmel viisil.', 'Rediscover you artistic side in VR. Countless ways to express yourself.', 'tilt.png'),
+(16, 'Raw Data', 'Võitle tulevikus maailma omava korporatsiooni vastu. Pane end proovile robotite vastu.', 'Fight in the future against a corporation. Test yourself in combat against robots.', 'rawdata.jpg');
 
 -- --------------------------------------------------------
 
@@ -123,7 +124,7 @@ CREATE TABLE `kasutaja` (
 CREATE TABLE `view_broneering` (
 `id` int(11)
 ,`kasutaja_id` int(11)
-,`pakett` enum('Pakett 1','Pakett 2')
+,`pakett` enum('1','2')
 ,`kellaaeg` enum('10:00 - 11:00','11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00')
 ,`kuupäev` date
 ,`broneerimise_aeg` timestamp
@@ -138,7 +139,8 @@ CREATE TABLE `view_broneering` (
 CREATE TABLE `view_game` (
 `id` int(11)
 ,`title` varchar(255)
-,`description` varchar(1023)
+,`estonian_description` varchar(1023)
+,`english_description` varchar(1023)
 ,`image` varchar(255)
 );
 
@@ -217,7 +219,8 @@ INSERT INTO `visit` (`id`, `time`, `ip`, `browser_name`, `browser_version`, `cou
 (23, '2018-04-02 15:54:36', '::1', 'Firefox', '59.0', NULL),
 (24, '2018-04-02 15:59:50', '::1', 'Chrome', '65.0.3325.181', 'Estonia'),
 (25, '2018-04-02 16:00:01', '::1', 'Chrome', '65.0.3325.181', 'Estonia'),
-(26, '2018-04-05 09:41:32', '::1', 'Chrome', '65.0.3325.181', NULL);
+(26, '2018-04-05 09:41:32', '::1', 'Chrome', '65.0.3325.181', NULL),
+(27, '2018-04-08 16:25:31', '::1', 'Firefox', '59.0', NULL);
 
 -- --------------------------------------------------------
 
@@ -235,7 +238,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_game`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_game`  AS  select `game`.`id` AS `id`,`game`.`title` AS `title`,`game`.`description` AS `description`,`game`.`image` AS `image` from `game` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_game`  AS  select `game`.`id` AS `id`,`game`.`title` AS `title`,`game`.`estonian_description` AS `estonian_description`,`game`.`english_description` AS `english_description`,`game`.`image` AS `image` from `game` ;
 
 -- --------------------------------------------------------
 
@@ -312,7 +315,7 @@ ALTER TABLE `visit`
 -- AUTO_INCREMENT for table `broneering`
 --
 ALTER TABLE `broneering`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `game`
@@ -324,13 +327,13 @@ ALTER TABLE `game`
 -- AUTO_INCREMENT for table `kasutaja`
 --
 ALTER TABLE `kasutaja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables

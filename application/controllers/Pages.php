@@ -116,7 +116,7 @@ class Pages extends CI_Controller {
 	public function broneerimine() {
 		if (!isset($_SESSION['email'])) {
 			$this->session->set_flashdata('alertType', 'info');
-			$this->session->set_flashdata('alertMessage', 'Broneerimiseks on vaja sisse logida.');
+			$this->session->set_flashdata('alertMessage', lang('info_login_to_reserv'));
 			$this->session->set_flashdata('redirect', 'broneerimine');
 			redirect('sisene');
 		}
@@ -158,7 +158,7 @@ class Pages extends CI_Controller {
 	public function profiil() {
 		if (!isset($_SESSION['email'])) {
 			$this->session->set_flashdata('alertType', 'info');
-			$this->session->set_flashdata('alertMessage', 'Profiili nägemiseks on vaja sisse logida.');
+			$this->session->set_flashdata('alertMessage', lang('info_login_to_see_profile'));
 			redirect('sisene');
 		}
 		else {

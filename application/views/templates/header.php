@@ -63,8 +63,8 @@ if ($_SESSION['site_lang'] == 'english') {
 					<div class="container pull-right" id="konto-lingid-konteiner">
 						<div class="pull-right">
 							<ul class="list-inline" id="konto-lingid">
-								<li><a href="#" id="est-flag"><img src="<?php echo base_url(); ?>assets/images/flags/est.png" class="lang-flag" /></a></li>
-								<li><a href="#" id="eng-flag"><img src="<?php echo base_url(); ?>assets/images/flags/eng.png" class="lang-flag" /></a></li>
+								<li><a href="#" id="est-flag" title="Estonian"><img src="<?php echo base_url(); ?>assets/images/flags/est.png" class="lang-flag" alt="estonian" /></a></li>
+								<li><a href="#" id="eng-flag" title="English"><img src="<?php echo base_url(); ?>assets/images/flags/eng.png" class="lang-flag" alt="english" /></a></li>
 								<?php if (!isset($_SESSION['email'])) {
 									echo '<li><form action="sisene" method="get"><input class="btn-link" type="submit" value="' . lang('header_link_login') . '" /></form></li>';
 									echo '<li><form action="registreeru" method="get"><input class="btn-link" type="submit" value="' . lang('header_link_register') . '" /></form></li>';

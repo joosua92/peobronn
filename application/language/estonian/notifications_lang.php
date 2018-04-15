@@ -53,3 +53,7 @@ $lang['info_cancel_reservation_success'] = 'Broneering tühistatud.';
 $lang['email_register_subject'] = 'Olete edukalt registreeritud - Mängumaailm';
 $lang['email_register_body'] = 'Olete edukalt endale Mängumaailm kasutaja teinud. ' . "\r\n" .
 	'Sisenemiseks vajutage kodulehel sisene lingile.' . "\r\n\r\n" . 'Mängumaailm';
+	
+// Pages
+$lang['info_login_to_reserv'] = 'Broneerimiseks on vaja sisse logida.';
+$lang['info_login_to_see_profile'] = 'Profiili nägemiseks on vaja sisse logida.';

@@ -53,3 +53,7 @@ $lang['info_cancel_reservation_success'] = 'Reservation canceled.';
 $lang['email_register_subject'] = 'You are successfully registered - Mängumaailm';
 $lang['email_register_body'] = 'You have successfully created a Mängumaailm account. ' . "\r\n" .
 	'To log in click on the login button on the website.' . "\r\n\r\n" . 'Mängumaailm';
+	
+// Pages
+$lang['info_login_to_reserv'] = 'You need to be logged in to reserv.';
+$lang['info_login_to_see_profile'] = 'You need to be logged in to see the profile page.';
