@@ -9,6 +9,7 @@ $(document).ready(function() {
 function draw_charts(data) {
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawCharts);
+	var lang = document.getElementsByTagName('html')[0].getAttribute('lang');
 	
 	function drawCharts() {
 		drawBrowserChart();
@@ -28,6 +29,9 @@ function draw_charts(data) {
 			height: 400,
 			titleTextStyle: {fontSize: 20}
         };
+		if (lang == 'en') {
+			options.title = "Web browsers";
+		}
 		chartData = google.visualization.arrayToDataTable(chartData);
         var chart = new google.visualization.PieChart(document.getElementById('browser-piechart'));
         chart.draw(chartData, options);
@@ -45,6 +49,9 @@ function draw_charts(data) {
 			height: 400,
 			titleTextStyle: {fontSize: 20}
         };
+		if (lang == 'en') {
+			options.title = "Countries";
+		}
 		chartData = google.visualization.arrayToDataTable(chartData);
         var chart = new google.visualization.PieChart(document.getElementById('country-piechart'));
         chart.draw(chartData, options);
@@ -62,6 +69,9 @@ function draw_charts(data) {
 			height: 400,
 			titleTextStyle: {fontSize: 20}
         };
+		if (lang == 'en') {
+			options.title = "Visit times";
+		}
 		chartData = google.visualization.arrayToDataTable(chartData);
         var chart = new google.visualization.PieChart(document.getElementById('time-piechart'));
         chart.draw(chartData, options);

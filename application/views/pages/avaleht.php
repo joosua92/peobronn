@@ -1,15 +1,11 @@
 <div class="container">
 	<div class="page-header">
-		<h1>MÄNGUMAAILM</h1>
+		<h1><?php echo lang('home_main_heading'); ?></h1>
 	</div>
 	<div>
-		<h2>Tutvustus</h2>
+		<h2><?php echo lang('home_introduction_title'); ?></h2>
 		<p class="tutvustus">
-			Mängumaailm pakub võimalusi reaalsusest põgenemiseks läbi uute
-			põnevate mängude ja viimase peal tehnikaga. Tulge, vaadake ja kogege virtuaalmaailma nii, 
-			nagu te enne näinud pole! Mängige üksi või koos sõpradega! Lisaks
-			on võimalus pidada sünnipäevi ja ruume rentida. Koha peal olemas
-			enda kosutamiseks kohvik.
+			<?php echo lang('home_introduction_text'); ?>
 		</p>
 	</div>
 </div>

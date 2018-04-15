@@ -1,36 +1,35 @@
 <div class="container">
 	<div class="page-header">
-		<h1>KORDUMA KIPPUVAD KÜSIMUSED</h1>
+		<h1><?php echo lang('faq_main_heading'); ?></h1>
 	</div>
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Mängumaailm</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Korduma kippuvad küsimused</li>
+			<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>"><?php echo lang('breadcrumb_root'); ?></a></li>
+			<li class="breadcrumb-item active" aria-current="page"><?php echo lang('faq_breadcrumb_last'); ?></li>
 		</ol>
 	</nav>
 	<div>
 		<dl id="küsimused">
-			<dt>Kellele on mängumaailm mõeldud?</dt>
-			<dd>Mängumaailm ootab kõiki seiklushimulisi alates 8ndast eluaastast, 
-			kes soovivad kogeda midagi erakordset ja ainulaadset. Ülemist vanusepiiri ei ole.</dd>
-			<dt>Mitu inimest mängumaailm mahutab?</dt>
-			<dd>Mugavalt 25-30 inimest.</dd>
-			<dt>Kas mängumaailmas saab maksta kaardiga?</dt>
-			<dd>Maksmine on võimalik nii sularahas, kaardiga kui ülekandega.</dd>
-			<dt>Kas oma toidud/joogid on lubatud kaasa võtta?</dt>
-			<dd>Toidud ja joogid on lubatud kaasa võtta Baasjaama peoruumi rentijal.</dd>
-			<dt>Kuidas reaalsest maailmast virtuaalreaalsusse põgenemine välja näeb?</dt>
-			<dd>Selleks tuleb pähe panna peakomplekt ja kätte võtta kaks pulti. Igaühele on eraldatud oma ala mängimiseks.</dd>
-			<dt>Kui pikalt võib virtuaalreaalsuses viibida?</dt>
-			<dd>Kindlat reeglit ei ole. Parimad mängud haaravad Sind tundideks.</dd>
-			<dt>Kui olen prillikandja, kas saan üldse virtuaalreaalsusprille kasutada?</dt>
-			<dd>Jah. Prille ei pea ära võtma, peakomplekt mahuvad isiklike prillide peale.</dd>
-			<dt>Kas teenus on hügieeniline?</dt>
-			<dd>Jah, peale igat kasutuskorda puhastame kõik seadmed.</dd>
-			<dt>Kas on oht ennast vigastada?</dt>
-			<dd>Kindlasti mitte. Sinu virtuaalne ruum on turvaliselt piiritletud.</dd>
-			<dt>Kas saan sõbraga koos virtuaalreaalsuses mängida?</dt>
-			<dd>Jah, sõltub valitud mängust.</dd>			
+			<dt><?php echo lang('faq_question_1'); ?></dt>
+			<dd><?php echo lang('faq_answer_1'); ?></dd>
+			<dt><?php echo lang('faq_question_2'); ?></dt>
+			<dd><?php echo lang('faq_answer_2'); ?></dd>
+			<dt><?php echo lang('faq_question_3'); ?></dt>
+			<dd><?php echo lang('faq_answer_3'); ?></dd>
+			<dt><?php echo lang('faq_question_4'); ?></dt>
+			<dd><?php echo lang('faq_answer_4'); ?></dd>
+			<dt><?php echo lang('faq_question_5'); ?></dt>
+			<dd><?php echo lang('faq_answer_5'); ?></dd>
+			<dt><?php echo lang('faq_question_6'); ?></dt>
+			<dd><?php echo lang('faq_answer_6'); ?></dd>
+			<dt><?php echo lang('faq_question_7'); ?></dt>
+			<dd><?php echo lang('faq_answer_7'); ?></dd>
+			<dt><?php echo lang('faq_question_8'); ?></dt>
+			<dd><?php echo lang('faq_answer_8'); ?></dd>
+			<dt><?php echo lang('faq_question_9'); ?></dt>
+			<dd><?php echo lang('faq_answer_9'); ?></dd>
+			<dt><?php echo lang('faq_question_10'); ?></dt>
+			<dd><?php echo lang('faq_answer_10'); ?></dd>
 		</dl> 
 	</div>
 </div>

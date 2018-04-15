@@ -1,11 +1,11 @@
 <div class="container">
 	<div class="page-header">
-		<h1>MÄNGUD & ELAMUSED</h1>
+		<h1><?php echo lang('games_main_heading'); ?></h1>
 	</div>
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Mängumaailm</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Mängud ja elamused</li>
+			<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>"><?php echo lang('breadcrumb_root'); ?></a></li>
+			<li class="breadcrumb-item active" aria-current="page"><?php echo lang('games_breadcrumb_last'); ?></li>
 		</ol>
 	</nav>
     <div class="container">
@@ -19,7 +19,11 @@
 				echo $game->title;
 				echo '</p>' . "\n";
 				echo '<p>';
-				echo $game->description;
+				if ($_SESSION['site_lang'] == "english") {
+					echo $game->english_description;
+				} else {
+					echo $game->estonian_description;
+				}
 				echo '</p>' . "\n";
 				echo '</div>' . "\n";
 				$clearfixVisible = '';
@@ -39,7 +43,7 @@
 			?>
 		</div>
 		<div class="row">
-			<button class="btn center-block" type="button" id="all-games-button">Näita kõiki</button>
+			<button class="btn center-block" type="button" id="all-games-button"><?php echo lang('games_show_all_button'); ?></button>
 		</div>
     </div>
 </div>

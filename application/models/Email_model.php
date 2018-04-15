@@ -3,7 +3,7 @@ class Email_model extends CI_Model {
 	
 	public function send_registration_email($user_email) {
 		if (constant('ENVIRONMENT') != 'development') {
-			$subject = 'Olete edukalt registreeritud - Mängumaailm';
+			$subject = lang('email_register_title');
 			$txt = 'Olete edukalt endale Mängumaailm kasutaja teinud. ' . "\r\n" .
 				'Sisenemiseks vajutage kodulehel sisene lingile.' . "\r\n\r\n" . 'Mängumaailm';
 			$headers = 'From: "Mängumaailm" <mangumaailm@online.ee>';

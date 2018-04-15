@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="<?php echo $_SESSION['lang']; ?>">
+<?php 
+if ($_SESSION['site_lang'] == 'english') {
+	echo '<html lang="en">';
+} else {
+	echo '<html lang="et">';
+}
+?>
 	<head>
 		<title><?php echo $title; ?></title>
 		<meta charset="utf-8" />
-		<meta name="description" content="<?php echo $pageDescription; ?>" />
 		<meta name="application-name" content="Mängumaailm" />
+		<meta name="description" content="<?php echo $pageDescription; ?>" />
 		<meta name="keywords" content="<?php echo $keywords; ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="google-signin-client_id" content="883720088699-for1689vnajr1birt2hqrnam9bs7j6ku.apps.googleusercontent.com" />
@@ -41,34 +47,31 @@
 	</head>
 	<body>
 		<div class="wrapper">
-
 			<nav class="navbar navbar-inverse">
 				<div class="container">
 					<div class="navbar-header">
 						<a href="<?php echo base_url(); ?>">
-							<img src="<?php echo base_url(); ?>assets/images/logo.png" alt="Mängumaailma" title="Avaleht" />
+							<img src="<?php echo base_url(); ?>assets/images/logo.png" alt="Mängumaailma" title="<?php echo lang('header_logo_title'); ?>" />
 						</a>
 					</div>
 					<ul class="nav navbar-nav navbar-right" id="navbar">
-						<li><a href="<?php echo base_url(); ?>mangud" title="Mängud ja elamused">MÄNGUD & ELAMUSED</a></li>
-						<li><a href="<?php echo base_url(); ?>hinnakiri" title="Hinnakiri">HINNAKIRI</a></li>
-						<li><a href="<?php echo base_url(); ?>kkk" title="Korduma kippuvad küsimused">KKK</a></li>
-						<li><a href="<?php echo base_url(); ?>broneerimine" title="Broneerimine">BRONEERIMINE</a></li>
+						<li><a href="<?php echo base_url(); ?>mangud" title="<?php echo lang('header_link_games_title'); ?>"><?php echo lang('header_link_games'); ?></a></li>
+						<li><a href="<?php echo base_url(); ?>hinnakiri" title="<?php echo lang('header_link_prices_title'); ?>"><?php echo lang('header_link_prices'); ?></a></li>
+						<li><a href="<?php echo base_url(); ?>kkk" title="<?php echo lang('header_link_faq_title'); ?>"><?php echo lang('header_link_faq'); ?></a></li>
+						<li><a href="<?php echo base_url(); ?>broneerimine" title="<?php echo lang('header_link_reserv_title'); ?>"><?php echo lang('header_link_reserv'); ?></a></li>
 					</ul>
 					<div class="container pull-right" id="konto-lingid-konteiner">
 						<div class="pull-right">
 							<ul class="list-inline" id="konto-lingid">
+								<li><a href="#" id="est-flag"><img src="<?php echo base_url(); ?>assets/images/flags/est.png" class="lang-flag" /></a></li>
+								<li><a href="#" id="eng-flag"><img src="<?php echo base_url(); ?>assets/images/flags/eng.png" class="lang-flag" /></a></li>
 								<?php if (!isset($_SESSION['email'])) {
-									echo '<li><form action="sisene" method="get"><input class="btn-link" type="submit" value="SISENE" /></form></li>';
-									echo '<li><form action="registreeru" method="get"><input class="btn-link" type="submit" value="REGISTREERU" /></form></li>';
-									//echo '<li><a href="' . base_url() . 'sisene">SISENE</a></li>';
-									//echo '<li><a href="' . base_url() . 'registreeru">REGISTREERU</a></li>';
+									echo '<li><form action="sisene" method="get"><input class="btn-link" type="submit" value="' . lang('header_link_login') . '" /></form></li>';
+									echo '<li><form action="registreeru" method="get"><input class="btn-link" type="submit" value="' . lang('header_link_register') . '" /></form></li>';
 								}
 								else {
-									echo '<li><form action="profiil" method="get"><input class="btn-link" type="submit" value="PROFIIL" /></form></li>';
-									echo '<li><form action="input/logout" method="post" id="logout-form"><input class="btn-link" type="submit" value="VÄLJU" /></form></li>';
-									//echo '<li><a href="' . base_url() . 'profiil" class="btn-link">PROFIIL</a></li>';
-									//echo '<li><a href="#" id="logout-link">VÄLJU</a></li>';
+									echo '<li><form action="profiil" method="get"><input class="btn-link" type="submit" value="' . lang('header_link_profile') . '" /></form></li>';
+									echo '<li><form action="input/logout" method="post" id="logout-form"><input class="btn-link" type="submit" value="' . lang('header_link_log_out') . '" /></form></li>';
 								}
 								?>
 							</ul>

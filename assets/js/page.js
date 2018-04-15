@@ -89,6 +89,18 @@ $(document).ready(function() {
 	$("#date-tooltip-js").show();
 });
 
+$(document).ready(function() {
+	var fun = function() {
+		location.reload();
+	}
+	$("#est-flag").click(function() {
+		$.post("input/set_language/est", fun);
+	});
+	$("#eng-flag").click(function() {
+		$.post("input/set_language/eng", fun);
+	});
+});
+
 function showAlert(type, message) {
 	// Shows the message in an alert box of specified type (in case #alert-box exists)
 	var alertBox = $("#alert-box");

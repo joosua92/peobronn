@@ -1,18 +1,18 @@
 <div class="container">
 	<div class="page-header">
-		<h1>KONTAKT</h1>
+		<h1><?php echo lang('contact_main_heading'); ?></h1>
 	</div>
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Mängumaailm</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Kontakt</li>
+			<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>"><?php echo lang('breadcrumb_root'); ?></a></li>
+			<li class="breadcrumb-item active" aria-current="page"><?php echo lang('contact_breadcrumb_last'); ?></li>
 		</ol>
 	</nav>
 	<div class="row">
 		<div class="col-md-6">
-			<p>Oleme avatud: E-P 10:00 - 19:00</p>
-			<p>E-post: <a href="mailto:mangumaailm@online.ee">mangumaailm@online.ee</a><p>
-			<p>Aadress: Kaarli pst. 8, Tallinn</p>
+			<p><?php echo lang('contact_open_times'); ?></p>
+			<p><?php echo lang('contact_email'); ?><a href="mailto:mangumaailm@online.ee">mangumaailm@online.ee</a><p>
+			<p><?php echo lang('contact_address'); ?></p>
 		</div>
 		<div class="col-md-6">
 			<div class="map-container" id="col41">
@@ -27,8 +27,14 @@
 	<div class="row">
 		<div class="col-md-12">
 			<br />
-			<h3>Mängumaailma plaan</h3>
-			<?php include 'assets/svg/layout.svg'; ?>
+			<h3><?php echo lang('contact_layout'); ?></h3>
+			<?php
+			if ($_SESSION['site_lang'] == 'english') {
+				include 'assets/svg/layout_eng.svg';
+			} else {
+				include 'assets/svg/layout_est.svg';
+			}
+			?>
 		</div>
 	</div>
 </div>

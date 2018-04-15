@@ -5,7 +5,7 @@ class Pages extends CI_Controller {
 		parent::__construct();
 		if (!isset($_SESSION['session_active'])) {
 			$_SESSION['session_active'] = true;
-			$_SESSION['lang'] = 'et';
+			$_SESSION['site_lang'] = 'estonian';
 			$this->log_visit();
 			// Put all reservations into session
 			$this->load->model('database_model');
@@ -84,32 +84,32 @@ class Pages extends CI_Controller {
 	}
 	
 	public function avaleht() {
-		$data['title'] = "Mängumaailm";
-		$data['pageDescription'] = 'Mängumaailm on üks Eesti moodsamaid ja suurimaid virtuaalreaalsuskeskusi.';
-		$data['keywords'] = "mängumaailm,avaleht,tutvustus,kirjeldus,virtuaalreaalsus";
+		$data['title'] = lang('home_title');
+		$data['pageDescription'] = lang('home_page_description');
+		$data['keywords'] = lang('home_keywords');
 		$this->loadPage("avaleht", $data);
 	}
 	
 	public function mangud() {
 		$this->load->model("database_model");
 		$data['games'] = $this->database_model->get_games(8);	
-		$data['title'] = "Mängud & elamused - Mängumaailm";
-		$data['pageDescription'] = 'Mängumaailma poolt pakutavad VR mängud.';
-		$data['keywords'] = "mängumaailm,virtuaalreaalsus,mängud";
+		$data['title'] = lang('games_title');
+		$data['pageDescription'] = lang('games_page_description');
+		$data['keywords'] = lang('games_keywords');
 		$this->loadPage("mangud", $data);
 	}
 	
 	public function hinnakiri() {
-		$data['title'] = "Hinnakiri - Mängumaailm";
-		$data['pageDescription'] = 'Mängumaailma teenuste hinnakiri.';
-		$data['keywords'] = "mängumaailm,hinnakiri,teenused";
+		$data['title'] = lang('prices_title');
+		$data['pageDescription'] = lang('prices_page_description');
+		$data['keywords'] = lang('prices_keywords');
 		$this->loadPage("hinnakiri", $data);
 	}
 	
 	public function kkk() {
-		$data['title'] = "Korduma kippuvad küsimused - Mängumaailm";
-		$data['pageDescription'] = 'Korduma kippuvad küsimused seoses Mänumaailmaga.';
-		$data['keywords'] = "mängumaailm,kkk,küsimused";
+		$data['title'] = lang('faq_title');
+		$data['pageDescription'] = lang('faq_page_description');
+		$data['keywords'] = lang('faq_keywords');
 		$this->loadPage("kkk", $data);
 	}
 	
@@ -121,9 +121,9 @@ class Pages extends CI_Controller {
 			redirect('sisene');
 		}
 		else {
-			$data['title'] = "Broneerimine - Mängumaailm";
-			$data['pageDescription'] = 'Broneeri endale üritus Mängumaailmas';
-			$data['keywords'] = "mängumaailm,broneeri,ajad";
+			$data['title'] = lang('reserv_title');
+			$data['pageDescription'] = lang('reserv_page_description');
+			$data['keywords'] = lang('reserv_keywords');
 			$this->loadPage("broneerimine", $data);
 		}
 	}
@@ -133,9 +133,9 @@ class Pages extends CI_Controller {
 			redirect('profiil');
 		}
 		else {
-			$data['title'] = "Sisene - Mängumaailm";
-			$data['pageDescription'] = 'Sisene Mängumaailma, et broneerida endale külastuse aeg või hallata profiili.';
-			$data['keywords'] = "mängumaailm,sisene,login";
+			$data['title'] = lang('login_title');
+			$data['pageDescription'] = lang('login_page_description');
+			$data['keywords'] = lang('login_keywords');
 			$this->loadPage("sisene", $data);
 		}
 		if (isset($_SESSION['redirect'])) {
@@ -148,9 +148,9 @@ class Pages extends CI_Controller {
 			redirect('profiil');
 		}
 		else {
-			$data['title'] = "Registreeru - Mängumaailm";
-			$data['pageDescription'] = 'Loo endale Mängumaailma kasutaja.';
-			$data['keywords'] = "mängumaailm,registreerumine";
+			$data['title'] = lang('register_title');
+			$data['pageDescription'] = lang('register_page_description');
+			$data['keywords'] = lang('register_keywords');
 			$this->loadPage("registreeru", $data);
 		}
 	}
@@ -170,9 +170,9 @@ class Pages extends CI_Controller {
 			}
 			$data['profile_picture_path'] = $user_picture_path;
 			$data['reservations'] = $this->database_model->get_reservations($_SESSION['email']);
-			$data['title'] = "Profiil - Mängumaailm";
-			$data['pageDescription'] = 'Halda oma Mängumaailma profiili.';
-			$data['keywords'] = "mängumaailm,profiil,kasutaja,broneeringud";
+			$data['title'] = lang('profile_title');
+			$data['pageDescription'] = lang('profile_page_description');
+			$data['keywords'] = lang('profile_keywords');
 			$this->loadPage("profiil", $data);
 		}
 	}
@@ -182,24 +182,24 @@ class Pages extends CI_Controller {
 			redirect('profiil');
 		}
 		else {
-			$data['title'] = "Olete välja logitud - Mängumaailm";
-			$data['pageDescription'] = 'Olete Mängumaailmast välja logitud.';
-			$data['keywords'] = "mängumaailm,väljund";
+			$data['title'] = lang('logged_out_title');
+			$data['pageDescription'] = lang('logged_out_page_description');
+			$data['keywords'] = lang('logged_out_keywords');
 			$this->loadPage("valjund", $data);
 		}
 	}
 	
 	public function statistika() {
-		$data['title'] = "Külastajate statistika - Mängumaailm";
-		$data['pageDescription'] = 'Mängumaailma veebilehe külastajate statistika.';
-		$data['keywords'] = "mängumaailm,statistika,külastajate statistika";
+		$data['title'] = lang('visitor_stats_title');
+		$data['pageDescription'] = lang('visitor_stats_page_description');
+		$data['keywords'] = lang('visitor_stats_keywords');
 		$this->loadPage("statistika", $data);
 	}
 	
 	public function kontakt() {
-		$data['title']= 'Kontakt - Mängumaailm';
-		$data['pageDescription'] = 'Mängumaailma kontaktinfo ja keskuse plaan.';
-		$data['keywords'] = "mängumaailm,kontakt,plaan";
+		$data['title']= lang('contact_title');
+		$data['pageDescription'] = lang('contact_page_description');
+		$data['keywords'] = lang('contact_keywords');
 		$this->loadPage("kontakt", $data);
 	}
 }

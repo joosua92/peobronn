@@ -12,6 +12,7 @@ function loadAllGames() {
 	var fun = function(data) {
 		var returnData = JSON.parse(data);
 		var base = 8;
+		var lang = document.getElementsByTagName('html')[0].getAttribute('lang');
 		for (var i = 0; i < returnData.length; i++) {
 			var game = returnData[i];
 			var disp = "";
@@ -21,7 +22,11 @@ function loadAllGames() {
 			disp += game.title;
 			disp += '</p>';
 			disp += '<p>';
-			disp += game.description;
+			if (lang == "en") {
+				disp += game.english_description;
+			} else {
+				disp += game.estonian_description;
+			}
 			disp += '</p>';
 			disp += '</div>';
 			var clearfixVisible = "";
