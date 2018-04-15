@@ -15,15 +15,13 @@
 			<p>Aadress: Kaarli pst. 8, Tallinn</p>
 		</div>
 		<div class="col-md-6">
-      <p>GOOGLE MAPS</p>
-    <div class="map-container" id="col41">
-			<div id="map" style="width:400px;height:400px;"></div>
-		</div>
-	</div>
-      <script src="<?php echo base_url(); ?>assets/js/maps.js"></script>
-      <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXuhqKp6fhCXlKHJvyZf-jV6Ivp4H9QhE&callback=initMap">
-      </script>
+			<div class="map-container" id="col41">
+				<div id="map"></div>
+			</div>
+			<script src="<?php echo base_url(); ?>assets/js/maps.js"></script>
+			<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXuhqKp6fhCXlKHJvyZf-jV6Ivp4H9QhE&callback=initMap">
+			</script>
 		</div>
 	</div>
 	<div class="row">
