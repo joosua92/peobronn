@@ -20,7 +20,7 @@ if ($_SESSION['site_lang'] == 'english') {
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/extra_style.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/jquery-fallback.js"></script> <!-- CDN fallback -->
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></scrips>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/jquery-ui-fallback.js"></script> <!-- CDN fallback -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/bootstrap-js-fallback.js"></script> <!-- CDN fallback -->

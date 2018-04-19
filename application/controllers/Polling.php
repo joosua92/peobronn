@@ -21,6 +21,9 @@ class Polling extends CI_Controller {
 			$returnData->anyRemoved = false;
 			echo json_encode($returnData);
 		}
+		if (isset($_SESSION['redirect'])) {
+			$this->session->set_flashdata('redirect', $_SESSION['redirect']);
+		}
 		return;
 	}
 }

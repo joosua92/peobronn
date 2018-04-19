@@ -27,7 +27,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<br />
-			<h3><?php echo lang('contact_layout'); ?></h3>
+			<h2><?php echo lang('contact_layout'); ?></h2>
 			<?php
 			if ($_SESSION['site_lang'] == 'english') {
 				include 'assets/svg/layout_eng.svg';

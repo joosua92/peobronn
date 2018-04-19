@@ -22,5 +22,5 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="<?php echo base_url() . 'assets/js/charts.js' ; ?>"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="<?php echo base_url() . 'assets/js/charts.js' ; ?>"></script>

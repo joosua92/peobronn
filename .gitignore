@@ -36,3 +36,4 @@ application/config/database.php
 assets/css/images/Thumbs.db
 user_files/*
 application/config/email.php
+assets/svg/layout_original.svg
