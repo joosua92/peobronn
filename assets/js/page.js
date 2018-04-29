@@ -77,19 +77,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	// Create datepicker
-	$("#datepicker").datepicker({
-		altField: "#kuupäev",
-		dateFormat: "dd/mm/yy"
-	});
-	// Disable typing input
-	$('#kuupäev').attr('readonly', true);
-	// Change tooltip
-	$("#date-tooltip-nojs").hide();
-	$("#date-tooltip-js").show();
-});
-
-$(document).ready(function() {
 	var fun = function() {
 		location.reload();
 	}

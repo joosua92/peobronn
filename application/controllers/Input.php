@@ -392,4 +392,24 @@ class Input extends CI_Controller {
 			return;
 		}
 	}
+	
+	public function date_data() {
+		$possibleReservationCount = 9;
+		$this->load->model("database_model");
+		$reservations = $this->database_model->get_all_reservations();
+		$dayReservationCount = array();
+		foreach ($reservations as $reservation) {
+			if (!array_key_exists($reservation->kuupäev, $dayReservationCount)) {
+				$dayReservationCount[$reservation->kuupäev] = 0;
+			}
+			$dayReservationCount[$reservation->kuupäev]++;
+		}
+		$disabledDates = array();
+		foreach($dayReservationCount as $date => $count) {
+			if ($count >= $possibleReservationCount) {
+				array_push($disabledDates, $date);
+			}
+		}
+		echo json_encode($disabledDates);
+	}
 }
