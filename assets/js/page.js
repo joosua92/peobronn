@@ -74,6 +74,21 @@ $(document).ready(function() {
 		};
 		$.post("input/reserv", formData, fun);
 	});
+	
+	// Delete user
+	$("#delete-user-form").submit(function(event){
+		event.preventDefault();
+		var fun = function(data) {
+			var returnData = JSON.parse(data);;
+			if (returnData.accountType == "google" && returnData.alertType == "success") {
+				googleSignOut();
+			}
+			window.location.href = returnData.redirect;
+		};
+		var formData = $("#delete-user-form").serialize();
+		formData += "&ajax=true";
+		$.post("input/delete_account", formData, fun);
+	});
 });
 
 $(document).ready(function() {

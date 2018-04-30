@@ -16,7 +16,7 @@
 				<p><?php echo lang('delete_account_info'); ?></p>
 			</div>
 			<div>
-				<form action="input/delete_account" method="post">
+				<form action="input/delete_account" method="post" id="delete-user-form">
 					<div class="form-group">
 						<label for="salasõna"><?php echo lang('delete_account_insert_password'); ?></label>
 						<a href="#" data-toggle="tooltip" data-placement="right" title="<?php echo lang('delete_account_insert_password_tip'); ?>">

@@ -183,8 +183,9 @@ $lang['delete_account_title'] = 'Delete account';
 $lang['delete_account_page_description'] = 'Delete Mängumaailm Account.';
 $lang['delete_account_keywords'] = 'mängumaailm,user,account,delete';
 $lang['delete_account_main_heading'] = 'Delete Mängumaailm Account';
-$lang['delete_account_info'] = 'Olete oma kontot jäädavalt kustutamas! Pärast kustutamist ' .
-	'tühistatakse ka kõik teie broneeringud. Konto kustutamise kinnitamiseks sisestage oma salasõna.';
+$lang['delete_account_info'] = 'You are permanently deleting your account! After deletion ' .
+	'all of your reservations will be also deleted. To confirm account deletion insert your password. ' .
+	'If you are using a googe account, insert "google" instead.';
 $lang['delete_account_insert_password'] = "Insert password:";
 $lang['delete_account_insert_password_tip'] = "Insert your password to permanently delete your account";
 $lang['delete_account_insert_password_placeholder'] = "Insert password";

@@ -179,7 +179,8 @@ $lang['delete_account_page_description'] = "Kustuta Mängumaailma konto.";
 $lang['delete_account_keywords'] = "mängumaailm,kasutaja,konto,kustuta";
 $lang['delete_account_main_heading'] = "Kustuta Mängumaailm konto";
 $lang['delete_account_info'] = 'Olete oma kontot jäädavalt kustutamas! Pärast kustutamist ' .
-	'tühistatakse ka kõik teie broneeringud. Konto kustutamise kinnitamiseks sisestage oma salasõna.';
+	'tühistatakse ka kõik teie broneeringud. Konto kustutamise kinnitamiseks sisestage oma salasõna. ' .
+	'Kui kasutate Google kontot, siis sisestage "google".';
 $lang['delete_account_insert_password'] = "Sisesta salasõna:";
 $lang['delete_account_insert_password_tip'] = "Sisesta oma konto salasõna, et konto jäädavalt kustutada";
 $lang['delete_account_insert_password_placeholder'] = "Sisesta salasõna";

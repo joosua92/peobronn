@@ -415,21 +415,31 @@ class Input extends CI_Controller {
 	
 	public function delete_account() {
 		$returnData = new stdClass();
+		$returnData->accountType = 'normal';
+		$returnData->redirect = "kustuta_kasutaja";
 		$salasõna = $this->input->post('salasõna');
 		$this->load->model('database_model');
 		$results = $this->database_model->get_user($_SESSION['email']);
+		$ajax = isset($_POST['ajax']);
 		if (count($results) < 1) {
 			$returnData->alertType = 'danger';
 			$returnData->alertMessage = lang('info_delete_user_no_account');
 		}
 		else {
 			$account = $results[0];
-			if (!password_verify($salasõna, $account->salasõna)) {
+			if ($_SESSION['liik'] == 'GOOGLE' && $salasõna != 'google') {
+				$returnData->alertType = 'danger';
+				$returnData->alertMessage = lang('info_delete_user_incorrect_password');
+				$returnData->accountType = 'google';
+			} elseif ($_SESSION['liik'] == 'TAVALINE' && !password_verify($salasõna, $account->salasõna)) {
 				$returnData->alertType = 'danger';
 				$returnData->alertMessage = lang('info_delete_user_incorrect_password');
 			}
 			else {
 				// USER WILL BE DELETED
+				if ($_SESSION['liik']) {
+					$returnData->accountType = 'google';
+				}
 				// delete profile pic
 				$this->load->model('files_model');
 				$this->files_model->delete_user_picture($_SESSION['user_id']);
@@ -454,6 +464,12 @@ class Input extends CI_Controller {
 		$this->session->set_flashdata('alertType', $returnData->alertType);
 		$this->session->set_flashdata('alertMessage', $returnData->alertMessage);
 		if ($returnData->alertType == 'success') {
+			$returnData->redirect = 'avaleht';
+		}
+		if ($ajax) {
+			echo json_encode($returnData);
+			return;
+		} elseif ($returnData->alertType == 'success') {
 			redirect('avaleht');
 		} else {
 			header("Location: http://$_SERVER[HTTP_HOST]/kustuta_kasutaja#" . rand(1000, 9999));
