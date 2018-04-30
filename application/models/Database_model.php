@@ -19,6 +19,12 @@ class Database_model extends CI_Model {
 		return $returnData->result();
 	}
 	
+	public function delete_user($userId) {
+		$userId = $this->db->escape($userId);
+		$query = "CALL kustuta_kasutaja($userId);";
+		$this->db->query($query);
+	}
+	
 	public function insert_reservation($data) {
 		$email = $this->db->escape($data['email']);
 		$pakett = $this->db->escape($data['pakett']);

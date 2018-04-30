@@ -202,4 +202,16 @@ class Pages extends CI_Controller {
 		$data['keywords'] = lang('contact_keywords');
 		$this->loadPage("kontakt", $data);
 	}
+	
+	public function kustuta_kasutaja() {
+		if (!isset($_SESSION['email'])) {
+			redirect('avaleht');
+		}
+		else {
+			$data['title'] = lang('delete_account_title');
+			$data['pageDescription'] = lang('delete_account_page_description');
+			$data['keywords'] = lang('delete_account_keywords');
+			$this->loadPage("kustuta_kasutaja", $data);
+		}
+	}
 }

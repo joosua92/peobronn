@@ -57,3 +57,8 @@ $lang['email_register_body'] = 'You have successfully created a Mängumaailm acc
 // Pages
 $lang['info_login_to_reserv'] = 'You need to be logged in to reserv.';
 $lang['info_login_to_see_profile'] = 'You need to be logged in to see the profile page.';
+
+// Delete user
+$lang['info_delete_user_no_account'] = 'Not logged in.';
+$lang['info_delete_user_incorrect_password'] = 'Wrong password.';
+$lang['info_delete_user_deletion_success'] = 'Account successfully deleted.';

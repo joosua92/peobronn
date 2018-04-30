@@ -412,4 +412,51 @@ class Input extends CI_Controller {
 		}
 		echo json_encode($disabledDates);
 	}
+	
+	public function delete_account() {
+		$returnData = new stdClass();
+		$salasõna = $this->input->post('salasõna');
+		$this->load->model('database_model');
+		$results = $this->database_model->get_user($_SESSION['email']);
+		if (count($results) < 1) {
+			$returnData->alertType = 'danger';
+			$returnData->alertMessage = lang('info_delete_user_no_account');
+		}
+		else {
+			$account = $results[0];
+			if (!password_verify($salasõna, $account->salasõna)) {
+				$returnData->alertType = 'danger';
+				$returnData->alertMessage = lang('info_delete_user_incorrect_password');
+			}
+			else {
+				// USER WILL BE DELETED
+				// delete profile pic
+				$this->load->model('files_model');
+				$this->files_model->delete_user_picture($_SESSION['user_id']);
+				// delete registrations
+				$userReservations = $this->database_model->get_reservations($_SESSION['email']);
+				foreach ($userReservations as $reservation) {
+					$this->database_model->remove_reservation($reservation->id);
+				}
+				// delete user
+				$this->database_model->delete_user($_SESSION['user_id']);
+				// unset user related session values
+				unset($_SESSION['user_id']);
+				unset($_SESSION['email']);
+				unset($_SESSION['eesnimi']);
+				unset($_SESSION['perenimi']);
+				unset($_SESSION['liik']);
+				// redirect main page
+				$returnData->alertType = 'success';
+				$returnData->alertMessage = lang('info_delete_user_deletion_success');
+			}
+		}
+		$this->session->set_flashdata('alertType', $returnData->alertType);
+		$this->session->set_flashdata('alertMessage', $returnData->alertMessage);
+		if ($returnData->alertType == 'success') {
+			redirect('avaleht');
+		} else {
+			header("Location: http://$_SERVER[HTTP_HOST]/kustuta_kasutaja#" . rand(1000, 9999));
+		}
+	}
 }

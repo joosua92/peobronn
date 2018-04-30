@@ -57,3 +57,8 @@ $lang['email_register_body'] = 'Olete edukalt endale Mängumaailm kasutaja teinu
 // Pages
 $lang['info_login_to_reserv'] = 'Broneerimiseks on vaja sisse logida.';
 $lang['info_login_to_see_profile'] = 'Profiili nägemiseks on vaja sisse logida.';
+
+// Delete user
+$lang['info_delete_user_no_account'] = 'Pole sisse logitud kasutajat.';
+$lang['info_delete_user_incorrect_password'] = 'Vale salasõna.';
+$lang['info_delete_user_deletion_success'] = 'Kasutaja edukalt kustutatud.';

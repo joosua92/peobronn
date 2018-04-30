@@ -28,7 +28,7 @@
 						</a>
 						<input type="password" class="form-control" id="salasõna" placeholder="<?php echo lang('login_insert_password_placeholder'); ?>" name="salasõna">
 					</div>
-					<input type="submit" value="Sisene">
+					<input type="submit" value="<?php echo lang('login_submit_button'); ?>">
 				</form>
 			</div>
 			<div class="col-md-6">

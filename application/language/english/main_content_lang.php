@@ -102,6 +102,7 @@ $lang['login_insert_password'] = 'Password:';
 $lang['login_insert_password_tip'] = 'Insert your password';
 $lang['login_insert_password_placeholder'] = 'Insert password';
 $lang['login_through_google'] = 'Log in through Google';
+$lang['login_submit_button'] = 'Login';
 
 // Register
 
@@ -147,6 +148,7 @@ $lang['profile_reservations_date'] = 'Date';
 $lang['profile_reservations_time'] = 'Time';
 $lang['profile_reservations_service'] = 'Package';
 $lang['profile_reservations_cancel'] = 'Cancel';
+$lang['profile_delete_account_link'] = 'Delete account';
 
 // Logged out
 
@@ -174,3 +176,16 @@ $lang['contact_open_times'] = 'Opening times: Mon-Sun 10:00 - 19:00';
 $lang['contact_email'] = 'E-mail: ';
 $lang['contact_address'] = 'Address: Kaarli pst. 8, Tallinn';
 $lang['contact_layout'] = 'Mängumaailm layout';
+
+// Delete account
+
+$lang['delete_account_title'] = 'Delete account';
+$lang['delete_account_page_description'] = 'Delete Mängumaailm Account.';
+$lang['delete_account_keywords'] = 'mängumaailm,user,account,delete';
+$lang['delete_account_main_heading'] = 'Delete Mängumaailm Account';
+$lang['delete_account_info'] = 'Olete oma kontot jäädavalt kustutamas! Pärast kustutamist ' .
+	'tühistatakse ka kõik teie broneeringud. Konto kustutamise kinnitamiseks sisestage oma salasõna.';
+$lang['delete_account_insert_password'] = "Insert password:";
+$lang['delete_account_insert_password_tip'] = "Insert your password to permanently delete your account";
+$lang['delete_account_insert_password_placeholder'] = "Insert password";
+$lang['delete_account_submit_button'] = "Delete account";

@@ -38,6 +38,7 @@
 					<p><b><?php echo lang('profile_data_first_name'); ?>&nbsp&nbsp</b><?php echo $_SESSION['eesnimi']; ?></p>
 					<p><b><?php echo lang('profile_data_last_name'); ?>&nbsp&nbsp</b><?php echo $_SESSION['perenimi']; ?></p>
 					<p><b><?php echo lang('profile_data_email'); ?>&nbsp&nbsp</b><?php echo $_SESSION['email']; ?></p>
+					<a href="<?php echo base_url(); ?>kustuta_kasutaja"><?php echo lang('profile_delete_account_link'); ?></a>
 				</div>
 			</div>
 			<div class="col-md-6">
