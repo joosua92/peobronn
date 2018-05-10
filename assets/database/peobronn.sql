@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2018 at 08:53 PM
+-- Generation Time: May 09, 2018 at 06:49 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -36,6 +36,11 @@ BEGIN
 	DELETE FROM broneering WHERE id=in_id;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `kustuta_kasutaja` (IN `in_id` INT)  NO SQL
+BEGIN
+	DELETE FROM kasutaja WHERE id=in_id;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sisesta_broneering` (IN `in_email` VARCHAR(255), IN `in_pakett` ENUM('1','2'), IN `in_kellaaeg` ENUM('10:00 - 11:00','11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00'), IN `in_kuupäev` DATE)  NO SQL
 BEGIN
 	DECLARE v_kasutaja_id INT(11);
@@ -63,6 +68,30 @@ CREATE TABLE `broneering` (
   `kuupäev` date NOT NULL,
   `broneerimise_aeg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `broneering`
+--
+
+INSERT INTO `broneering` (`id`, `kasutaja_id`, `pakett`, `kellaaeg`, `kuupäev`, `broneerimise_aeg`) VALUES
+(10, 1, '1', '10:00 - 11:00', '2018-05-22', '2018-04-29 17:33:03'),
+(11, 1, '1', '11:00 - 12:00', '2018-05-22', '2018-04-29 17:33:06'),
+(12, 1, '1', '12:00 - 13:00', '2018-05-22', '2018-04-29 17:33:09'),
+(14, 1, '1', '14:00 - 15:00', '2018-05-22', '2018-04-29 17:33:12'),
+(15, 1, '1', '15:00 - 16:00', '2018-05-22', '2018-04-29 17:33:14'),
+(16, 1, '1', '16:00 - 17:00', '2018-05-22', '2018-04-29 17:33:15'),
+(17, 1, '1', '17:00 - 18:00', '2018-05-22', '2018-04-29 17:33:18'),
+(18, 1, '1', '18:00 - 19:00', '2018-05-22', '2018-04-29 17:33:21'),
+(19, 1, '1', '11:00 - 12:00', '2018-05-18', '2018-04-29 17:33:38'),
+(20, 1, '1', '10:00 - 11:00', '2018-05-13', '2018-04-29 17:33:42'),
+(21, 1, '1', '11:00 - 12:00', '2018-05-13', '2018-04-29 17:33:44'),
+(22, 1, '1', '12:00 - 13:00', '2018-05-13', '2018-04-29 17:33:46'),
+(23, 1, '1', '13:00 - 14:00', '2018-05-13', '2018-04-29 17:33:48'),
+(24, 1, '1', '14:00 - 15:00', '2018-05-13', '2018-04-29 17:33:49'),
+(26, 1, '1', '16:00 - 17:00', '2018-05-13', '2018-04-29 17:33:53'),
+(27, 1, '1', '17:00 - 18:00', '2018-05-13', '2018-04-29 17:33:55'),
+(28, 1, '2', '18:00 - 19:00', '2018-05-13', '2018-05-03 11:13:52'),
+(29, 1, '1', '15:00 - 16:00', '2018-05-13', '2018-05-03 11:44:51');
 
 -- --------------------------------------------------------
 
@@ -114,6 +143,14 @@ CREATE TABLE `kasutaja` (
   `liik` enum('TAVALINE','GOOGLE','SMART-ID') NOT NULL,
   `salasõna` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kasutaja`
+--
+
+INSERT INTO `kasutaja` (`id`, `email`, `eesnimi`, `perenimi`, `liik`, `salasõna`) VALUES
+(1, 'ergo@nigola.ee', 'erki', 'ikre', 'TAVALINE', '$2y$10$MfqIRbf3NAdSrkPDzv29eeGTvCGsK2FGQsB.ULXyPwMLxwB2AV5rq'),
+(2, 'test@example.com', 'Test', 'Test', 'TAVALINE', '$2y$10$s4/TYLvYZ0PjkY9LICQKvuWazn7bNzYEKrnDQ8cq5mEv.GKEY5rHe');
 
 -- --------------------------------------------------------
 
@@ -315,7 +352,7 @@ ALTER TABLE `visit`
 -- AUTO_INCREMENT for table `broneering`
 --
 ALTER TABLE `broneering`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `game`
@@ -327,7 +364,7 @@ ALTER TABLE `game`
 -- AUTO_INCREMENT for table `kasutaja`
 --
 ALTER TABLE `kasutaja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `visit`
